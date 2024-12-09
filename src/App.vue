@@ -30,6 +30,6 @@ const allRouteItems = [
 
 <script lang="ts">
 export default {
-  data: () => ({drawer: null}),
-}
+  data: () => ({ drawer: null }),
+};
 </script>

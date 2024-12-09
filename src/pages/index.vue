@@ -1,8 +1,33 @@
+<script setup lang="ts">
+import { useExercises } from "@/composable/useExercises";
+const { exercises, error } = useExercises();
+</script>
+
 <template>
-  <HelloWorld/>
+  <div v-if="error">
+    {{ error }}
+  </div>
+  <div v-else>
+    <ul>
+      <!-- <li v-for="exercise in exercises" :key="exercise.id">
+        {{ exercise.name }} - {{ exercise.leeftijdsgroep }}
+      </li> -->
+      <!-- <li v-for="exercise in exercises" :key="exercise.id">
+        <span
+          v-for="(category, index) in JSON.parse(exercise.categorie)"
+          :key="index"
+          >{{ category }}
+        </span>
+      </li> -->
+    </ul>
+    {{ exercises }}
+  </div>
 </template>
 
-<script setup lang="ts">
-import HelloWorld from "@/components/HelloWorld.vue";
-
-</script>
+<!-- <li v-for="exercise in exercises" :key="exercise.id">
+  {{ exercise.name }} -
+  <span
+    v-for="(category, index) in JSON.parse(exercise.categorie)"
+    :key="index"
+    >{{ category }}</span>
+</li> -->
