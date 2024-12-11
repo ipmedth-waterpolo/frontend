@@ -2,7 +2,7 @@
   <v-app-bar>
     <v-app-bar-title>Waterpolo Planner</v-app-bar-title>
   </v-app-bar>
-  <ResponsiveContainer>
+  <PageContent>
     <v-card
       max-width="500"
       class="elevation-8 mx-auto"
@@ -71,15 +71,15 @@
         </form>
       </v-card-text>
     </v-card>
-  </ResponsiveContainer>
+  </PageContent>
 </template>
 
 <script lang="ts">
-import ResponsiveContainer from "@/components/ResponsiveContainer.vue";
+import PageContent from "@/components/PageContent.vue";
 
 export default {
   name: "Login",
-  components: {ResponsiveContainer},
+  components: {PageContent},
   data() {
     return {
       email: "",
