@@ -18,7 +18,7 @@ const loggedIn = true;
 
 const allRouteItems = [
   {title: 'Home', to: '/'},
-  {title: 'Training maken', to: '/training-maken'},
+  {title: 'Training maken', to: '/oefeningen'},
   {title: 'Mijn Trainingen', to: '/mijn-trainingen'},
   {title: 'About', to: '/about'},
   {title: 'Contact', to: '/contact'},
