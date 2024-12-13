@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 </script>
-<!-- ResponsiveContainer.vue -->
 <template>
   <v-container
     fluid

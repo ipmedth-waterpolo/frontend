@@ -31,6 +31,7 @@ export default [
         },
       ],
       'vue/multi-word-component-names': 'off',
+      'vue/ html-closing-bracket-spacing': 'off',
     }
   }
 ]
