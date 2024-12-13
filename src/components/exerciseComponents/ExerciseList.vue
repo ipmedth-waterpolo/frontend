@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { useExercises } from "@/composable/useExercises";
 import Exercise from "@/components/exerciseComponents/Exercise.vue";
-const { exercises, error } = useExercises();
-// defineProps({
-//   exercises: {
-//     type: Array,
-//     required: true,
-//   },
-// })
+
+defineProps({
+  exercises: {
+    type: Array,
+    required: true,
+  },
+})
 </script>
 
 <template>
@@ -24,7 +23,7 @@ const { exercises, error } = useExercises();
         md="6"
         lg="4"
       >
-        <Exercise :exercise />
+        <Exercise :exercise/>
       </v-col>
     </v-row>
   </v-container>

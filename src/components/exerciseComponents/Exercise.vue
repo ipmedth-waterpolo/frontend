@@ -7,10 +7,15 @@ defineProps({
     required: true,
   },
 })
+
 </script>
 
+<!--@click="$router.push(`/oefeningen/${exercise.id}`)"-->
+
 <template>
-  <v-card class="ma-0" density="comfortable">
+  <v-card class="ma-0" density="comfortable"
+          @click="$router.push({ path: `/oefeningen/${exercise.id}` })"
+  >
     <v-container class="pa-0">
       <v-row align="center">
         <!-- Card Title -->
@@ -22,7 +27,7 @@ defineProps({
 
         <!-- Exercise Visual -->
         <v-col cols="2" class="d-flex justify-end">
-          <ExerciseVisual :exercise="exercise" />
+          <ExerciseVisual :exercise="exercise"/>
         </v-col>
       </v-row>
     </v-container>
