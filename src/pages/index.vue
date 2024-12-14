@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { useExercises } from "@/composable/useExercises";
-const { exercises, error } = useExercises();
+import { onMounted } from "vue";
+const { exercises, error, fetchExercises } = useExercises();
+
+onMounted(() => {
+  fetchExercises();
+});
 </script>
 
 <template>
