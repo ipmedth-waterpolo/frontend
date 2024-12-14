@@ -14,7 +14,7 @@ onMounted(() => {
 <template>
   <PageContent>
     <div v-if="error">error retrieving exercises</div>
-    <ExerciseList v-else :exercises />
+    <ExerciseFiltering v-else :exercises />
   </PageContent>
 </template>
 
