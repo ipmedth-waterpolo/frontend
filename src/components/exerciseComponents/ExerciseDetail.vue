@@ -26,7 +26,7 @@ defineProps({
       <p><strong>Age Group:</strong> {{ JSON.parse(exercise.leeftijdsgroep).join(", ") }}</p>
       <p><strong>Duration:</strong> {{ exercise.duur }} minutes</p>
       <p><strong>Min. Players:</strong> {{ exercise.minimum_aantal_spelers }}</p>
-      <p><strong>Requirements:</strong> {{ JSON.parse(exercise.benodigdheden).join(", ") }}</p>
+<!--      <p><strong>Requirements:</strong> {{ JSON.parse(exercise.benodigdheden).join(", ") }}</p>-->
       <p><strong>Water Needed:</strong> {{ exercise.water_nodig ? "Yes" : "No" }}</p>
       <v-btn
         v-if="exercise.source"
