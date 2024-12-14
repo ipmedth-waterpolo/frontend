@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Exercise: typeof import('./src/components/exerciseComponents/Exercise.vue')['default']
     ExerciseDetail: typeof import('./src/components/exerciseComponents/ExerciseDetail.vue')['default']
+    ExerciseFiltering: typeof import('./src/components/exerciseComponents/ExerciseFiltering.vue')['default']
     ExerciseList: typeof import('./src/components/exerciseComponents/ExerciseList.vue')['default']
     ExerciseVisual: typeof import('./src/components/exerciseComponents/ExerciseVisual.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
