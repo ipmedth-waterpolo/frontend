@@ -1,23 +1,37 @@
 import { exerciseDao } from "@/dao/exercise_dao";
-import { inject, onMounted, ref } from "vue";
+import { inject, ref } from "vue";
 
 export function useExercises() {
   const apiService = inject("apiService") as {
-    getData: () => Promise<exerciseDao[]>;
+    getExercises: () => Promise<exerciseDao[]>;
+    getExerciseById: (id: string) => Promise<exerciseDao>;
   };
 
   const exercises = ref<exerciseDao[]>([]);
+  const exercise = ref<exerciseDao | null>(null);
   const error = ref<string | null>(null);
 
-  onMounted(async () => {
+  const fetchExercises = async () => {
     try {
-      const data = await apiService.getData();
+      const data = await apiService.getExercises();
       exercises.value = data;
     } catch (err) {
-      error.value = "Er is een fout opgetreden bij het ophalen van de data";
+      error.value =
+        "Er is een fout opgetreden bij het ophalen van de oefeningen";
       console.error(err);
     }
-  });
+  };
 
-  return { exercises, error };
+  const fetchExerciseById = async (id: string) => {
+    try {
+      const data = await apiService.getExerciseById(id);
+      exercise.value = data;
+    } catch (err) {
+      error.value =
+        "Er is een fout opgetreden bij het ophalen van de desbetreffende oefening";
+      console.error(err);
+    }
+  };
+
+  return { exercises, exercise, error, fetchExercises, fetchExerciseById };
 }
