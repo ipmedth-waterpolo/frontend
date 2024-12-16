@@ -2,16 +2,15 @@
 
 </script>
 <template>
-  <v-container
-    fluid
-    fill-height
-    class="align-content-center"
-    height="100%"
-  >
-    <slot />
-  </v-container>
+<!--  <v-container>-->
+    <slot/>
+<!--  </v-container>-->
 </template>
 
 <style scoped>
 
 </style>
+<!--    fluid-->
+<!--    fill-height-->
+<!--    class="align-content-center"-->
+<!--    height="100%"-->
