@@ -3,6 +3,7 @@ import { exerciseDao } from "../dao/exercise_dao";
 
 const axiosInstance = axios.create({
   baseURL: "http://127.0.0.1:8000/api",
+  // baseURL: "https://waterpolo-planner.wptraining.info/api",
 });
 
 const mapToExerciseDao = (exercise: {
@@ -58,10 +59,20 @@ export const apiService = {
     }
   },
 
+  //Get exercise by ID
   async getExerciseById(id: string): Promise<exerciseDao> {
     try {
       const response = await axiosInstance.get(`/data/${id}`);
       return mapToExerciseDao(response.data);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  //Delete exercise by ID
+  async deleteExercise(id: string): Promise<void> {
+    try {
+      await axiosInstance.delete(`/data/${id}`);
     } catch (error) {
       throw error;
     }
