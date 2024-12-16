@@ -3,6 +3,8 @@ import PageContent from "@/components/PageContent.vue";
 import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
 import { useExercises } from "@/composable/useExercises";
 import { onMounted } from "vue";
+import ExerciseCategoryFilter from "@/components/exerciseComponents/ExerciseCategoryFilter.vue";
+import ExerciseFiltering from "@/components/exerciseComponents/ExerciseFiltering.vue";
 
 const { exercises, error, fetchExercises } = useExercises();
 
@@ -14,7 +16,8 @@ onMounted(() => {
 <template>
   <PageContent>
     <div v-if="error">error retrieving exercises</div>
-    <ExerciseList v-else :exercises />
+    <ExerciseCategoryFilter v-else :exercises />
+<!--    <ExerciseFiltering :exercises="exercises" />-->
   </PageContent>
 </template>
 

@@ -10,9 +10,6 @@ defineProps({
 </script>
 
 <template>
-  <div v-if="error">
-    {{ error }}
-  </div>
   <v-container>
     <v-row>
       <v-col
