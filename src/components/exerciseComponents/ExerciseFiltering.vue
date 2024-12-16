@@ -60,7 +60,7 @@ const filteredExercises = computed(() => {
     <v-row>
       <!-- Filters Section -->
       <v-col cols="12">
-        <v-card color="blue">
+        <v-card>
           <v-card-title>Filters</v-card-title>
           <v-card-text>
 

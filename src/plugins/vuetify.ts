@@ -18,4 +18,10 @@ export default createVuetify({
   theme: {
     defaultTheme: prefersDark ? "dark" : "light",
   },
+  defaults: {
+    global: {
+      transition: 'no',
+      ripple: false,
+    }
+  }
 });
