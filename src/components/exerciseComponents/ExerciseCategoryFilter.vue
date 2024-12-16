@@ -1,8 +1,18 @@
 <script setup lang="ts">
-import {ref, computed} from "vue";
-import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
+import {ref, computed, watch} from "vue";
 import ExerciseFiltering from "@/components/exerciseComponents/ExerciseFiltering.vue";
+import {useRoute, useRouter} from "vue-router";
 
+// Router instances
+const route = useRoute();
+const router = useRouter();
+
+// Filters state
+const filters = ref({
+  categorie: route.query.categorie || "", // Initialize from query
+});
+
+// Props for exercises
 const props = defineProps({
   exercises: {
     type: Array,
@@ -10,12 +20,9 @@ const props = defineProps({
   },
 });
 
-const filters = ref({
-  categorie: "",
-})
-
+// Category options
 const categorieOptions = [
-  {label: "Alle Categorieën", value: ""},
+  {label: "Alle Categorieën", value: "alle"},
   {label: "Warming Up", value: "warming-up"},
   {label: "Techniek", value: "techniek"},
   {label: "Tactiek", value: "tactiek"},
@@ -25,54 +32,67 @@ const categorieOptions = [
   {label: "Theorie", value: "theorie"},
 ];
 
-const cards = ref(new Array(8).fill(null));
-
+// Filter exercises based on category
 const filteredExercises = computed(() => {
-  return props.exercises.filter(exercise => {
+  return props.exercises.filter((exercise) => {
     return (
-      (filters.value.categorie === "" ||
-        exercise.categorie.includes(filters.value.categorie))
+        filters.value.categorie === "" ||
+        filters.value.categorie === "alle" ||
+        exercise.categorie.includes(filters.value.categorie)
     );
   });
 });
+
+const setLabel = (categorie: string) => {
+  const option = categorieOptions.find((option) => option.value === categorie);
+  return option ? option.label : categorie;
+}
+
+// Watch for changes in route query and update filters
+watch(
+    () => route.query.categorie,
+    (newCategorie) => {
+      filters.value.categorie = newCategorie || "";
+    }
+);
+
+// Navigate to a new category
+const navigateToCategory = (categorie: string) => {
+  router.push({path: "/oefeningen", query: {categorie}});
+};
+
 </script>
 
-
 <template>
+  <!-- Category Selection -->
   <v-container v-if="filters.categorie === ''">
     <v-row>
       <v-col
-        v-for="(option, index) in categorieOptions"
-        :key="index"
-        cols="12"
-        sm="6"
-        md="3"
+          v-for="(option, index) in categorieOptions"
+          :key="index"
+          cols="6"
       >
-        <v-card >
-          <v-card-title>{{ option.label }}</v-card-title>
-
-          <v-card-text>
-            hoi
-          </v-card-text>
-
+        <v-card @click="navigateToCategory(option.value)">
+          <v-card-title>{{ setLabel(option.value) }}</v-card-title>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
 
-<!--  <ExerciseFiltering v-else exercises="filteredExercises" />-->
+  <!-- Filtered Exercises -->
+  <v-container v-else>
+    <v-card>
+      <v-card-title>Huidige selectie: {{ setLabel(filters.categorie) }}</v-card-title>
 
+      <v-card-actions>
+        <v-btn @click="router.push('/oefeningen')">Andere categorie kiezen</v-btn>
+      </v-card-actions>
+    </v-card>
+
+    <ExerciseFiltering :exercises="filteredExercises"/>
+  </v-container>
 </template>
 
-<!--<v-select-->
-<!--  v-model="filters.categorie"-->
-<!--  :items="categorieOptions"-->
-<!--  item-value="value"-->
-<!--  item-title="label"-->
-<!--  label="Categorie"-->
-<!--&gt;</v-select>-->
-
-
 <style scoped>
-
+/* Add custom styles if necessary */
 </style>
