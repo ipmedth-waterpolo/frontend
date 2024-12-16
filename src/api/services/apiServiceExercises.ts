@@ -50,7 +50,7 @@ const mapToExerciseDao = (exercise: {
   );
 };
 
-export const apiService = {
+export const apiServiceExercises = {
   //Get the list of ALL exercises
   async getExercises(): Promise<exerciseDao[]> {
     try {

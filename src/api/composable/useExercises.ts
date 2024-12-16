@@ -1,8 +1,8 @@
-import { exerciseDao } from "@/dao/exercise_dao";
-import { inject, ref } from "vue";
+import {exerciseDao} from "@/api/dao/exercise_dao";
+import {inject, ref} from "vue";
 
 export function useExercises() {
-  const apiService = inject("apiService") as {
+  const apiServiceExercises = inject("apiServiceExercises") as {
     getExercises: () => Promise<exerciseDao[]>;
     getExerciseById: (id: string) => Promise<exerciseDao>;
     deleteExercise: (id: string) => Promise<void>;
@@ -15,9 +15,7 @@ export function useExercises() {
 
   const fetchExercises = async () => {
     try {
-      const data = await apiService.getExercises();
-      console.log("Fetched exercises:", data);
-      exercises.value = data;
+      exercises.value = await apiServiceExercises.getExercises();
     } catch (err) {
       error.value =
         "Er is een fout opgetreden bij het ophalen van de oefeningen";
@@ -27,8 +25,7 @@ export function useExercises() {
 
   const fetchExerciseById = async (id: string) => {
     try {
-      const data = await apiService.getExerciseById(id);
-      exercise.value = data;
+      exercise.value = await apiServiceExercises.getExerciseById(id);
     } catch (err) {
       error.value =
         "Er is een fout opgetreden bij het ophalen van de desbetreffende oefening";
@@ -51,7 +48,7 @@ export function useExercises() {
 
   const createExercise = async (newExercise: Record<string, any>) => {
     try {
-      const createdExercise = await apiService.createExercise(newExercise);
+      const createdExercise = await apiServiceExercises.createExercise(newExercise);
       exercises.value.push(createdExercise); // Voeg de nieuwe oefening toe aan de bestaande lijst
     } catch (err) {
       error.value =

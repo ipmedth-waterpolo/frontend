@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useExercises } from "@/composable/useExercises";
+import { useExercises } from "@/api/composable/useExercises";
 import { onMounted } from "vue";
 const { exercises, error, fetchExercises } = useExercises();
 

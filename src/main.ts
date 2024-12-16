@@ -14,12 +14,13 @@ import App from "./App.vue";
 import { createApp } from "vue";
 
 //API
-import { apiService } from "./services/apiService";
+import { apiServiceExercises } from "@/api/services/apiServiceExercises";
 
 const app = createApp(App);
 
 registerPlugins(app);
 
-app.provide("apiService", apiService);
+app.provide("apiServiceExercises", apiServiceExercises);
+app.provide("apiServiceTrainings", apiServiceTrainings);
 
 app.mount("#app");

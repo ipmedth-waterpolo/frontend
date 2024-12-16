@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ExerciseDetail from "@/components/exerciseComponents/ExerciseDetail.vue";
-import { useExercises } from "@/composable/useExercises";
+import { useExercises } from "@/api/composable/useExercises";
 import { onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
