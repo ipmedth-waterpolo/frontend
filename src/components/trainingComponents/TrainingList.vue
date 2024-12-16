@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TrainingDetail from "@/components/trainingComponents/TrainingDetail.vue";
+import Training from "@/components/trainingComponents/Training.vue";
 
 defineProps({
   trainings: {
@@ -21,7 +21,7 @@ defineProps({
           md="6"
           lg="4"
       >
-        <TrainingDetail :training/>
+        <Training :training/>
       </v-col>
     </v-row>
   </v-container>
