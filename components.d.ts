@@ -18,6 +18,8 @@ declare module 'vue' {
     PageContent: typeof import('./src/components/PageContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TrainingDetail: typeof import('./src/components/trainingComponents/TrainingDetail.vue')['default']
+    TrainingList: typeof import('./src/components/trainingComponents/TrainingList.vue')['default']
     Welkom: typeof import('./src/components/Welkom.vue')['default']
   }
 }

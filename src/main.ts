@@ -15,6 +15,7 @@ import { createApp } from "vue";
 
 //API
 import { apiServiceExercises } from "@/api/services/apiServiceExercises";
+import { apiServiceTrainings} from "@/api/services/apiServiceTrainings";
 
 const app = createApp(App);
 
