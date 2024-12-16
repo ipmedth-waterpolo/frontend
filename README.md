@@ -2,6 +2,7 @@
 
 - [icons](https://pictogrammers.com/library/mdi/)
     - gebruik deze met mdi- prefix in een v-icon tag
+- [kleurtjes](https://vuetifyjs.com/en/styles/colors/)
 
 
 # Vuetify (Default)

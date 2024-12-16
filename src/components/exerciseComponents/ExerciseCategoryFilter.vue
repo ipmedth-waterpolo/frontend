@@ -72,12 +72,17 @@ const navigateToCategory = (categorie: string) => {
           :key="index"
           cols="6"
       >
-        <v-card @click="navigateToCategory(option.value)">
-          <v-card-title>{{ setLabel(option.value) }}</v-card-title>
+        <v-card
+            min-height="120"
+            :color="index === 0 ? 'blue-darken-3' : undefined"
+            @click="navigateToCategory(option.value)"
+        >
+          <v-card-title class="text-center text-h6 text-wrap">{{ setLabel(option.value) }}</v-card-title>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
+
 
   <!-- Filtered Exercises -->
   <v-container v-else>
@@ -94,5 +99,5 @@ const navigateToCategory = (categorie: string) => {
 </template>
 
 <style scoped>
-/* Add custom styles if necessary */
+
 </style>

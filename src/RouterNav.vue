@@ -32,12 +32,15 @@ export default {
   </v-navigation-drawer>
 
   <v-app-bar>
-    <v-app-bar-nav-icon @click="drawer = !drawer" />
+    <v-app-bar-nav-icon @click="drawer = !drawer"/>
 
     <v-app-bar-title>Waterpolo Planner</v-app-bar-title>
+    <v-btn icon @click="$router.push('/')">
+      <v-img inline class="mx-2" src="@/assets/ZVL_Logo.png" contain height="36" width="36"/>
+    </v-btn>
   </v-app-bar>
   <v-main>
-    <router-view />
+    <router-view/>
   </v-main>
 </template>
 
