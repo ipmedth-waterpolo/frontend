@@ -54,62 +54,61 @@ const filteredExercises = computed(() => {
 
 
 <template>
-
-
   <v-container>
-    <v-row>
+<!--    <v-row>-->
       <!-- Filters Section -->
-      <v-col cols="12">
-        <v-card>
-          <v-card-title>Filters</v-card-title>
-          <v-card-text>
 
-            <!-- Water Nodig Filter -->
-            <v-select
-                v-model="filters.waterNodig"
-                :items="waterNodigOptions"
-                item-value="value"
-                item-title="label"
-                label="Water oefening?"
-            ></v-select>
+<!--      <v-col cols="12">-->
+        <v-expansion-panels>
+          <v-expansion-panel title="Filters">
+            <v-expansion-panel-text>
+              <v-card-text>
+                <!-- Water Nodig Filter -->
+                <v-select
+                  v-model="filters.waterNodig"
+                  :items="waterNodigOptions"
+                  item-value="value"
+                  item-title="label"
+                  label="Water oefening?"
+                ></v-select>
 
-            <!-- Leeftijdsgroep Filter -->
-            <v-select
-                v-model="filters.leeftijdsgroep"
-                :items="leeftijdsgroepOptions"
-                item-value="value"
-                item-title="label"
-                label="Leeftijdsgroep"
-            ></v-select>
+                <!-- Leeftijdsgroep Filter -->
+                <v-select
+                  v-model="filters.leeftijdsgroep"
+                  :items="leeftijdsgroepOptions"
+                  item-value="value"
+                  item-title="label"
+                  label="Leeftijdsgroep"
+                ></v-select>
 
-            <!-- Duur Filter -->
-            <v-range-slider
-                v-model="filters.duur"
-                :max="240"
-                label="Duur in minuten"
-                step="5"
-                thumb-label="always"
-            ></v-range-slider>
+                <!-- Duur Filter -->
+                <v-range-slider
+                  v-model="filters.duur"
+                  :max="240"
+                  label="Duur in minuten"
+                  step="5"
+                  thumb-label="always"
+                ></v-range-slider>
 
-            <!-- Minimum Aantal Spelers Filter -->
-            <v-range-slider
-                v-model="filters.minimumAantalSpelers"
-                :max="20"
-                label="Minimum aantal spelers"
-                thumb-label="always"
-                step="1"
-            ></v-range-slider>
-          </v-card-text>
-        </v-card>
-      </v-col>
-
-    </v-row>
+                <!-- Minimum Aantal Spelers Filter -->
+                <v-range-slider
+                  v-model="filters.minimumAantalSpelers"
+                  :max="20"
+                  label="Minimum aantal spelers"
+                  thumb-label="always"
+                  step="1"
+                ></v-range-slider>
+              </v-card-text>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+        </v-expansion-panels>
+<!--      </v-col>-->
+<!--    </v-row>-->
   </v-container>
 
-
-  <ExerciseList :exercises="filteredExercises"/>
-
+    <ExerciseList :exercises="filteredExercises" />
 </template>
+
 
 
 <style scoped>
