@@ -36,9 +36,9 @@ const categorieOptions = [
 const filteredExercises = computed(() => {
   return props.exercises.filter((exercise) => {
     return (
-        filters.value.categorie === "" ||
-        filters.value.categorie === "alle" ||
-        exercise.categorie.includes(filters.value.categorie)
+      filters.value.categorie === "" ||
+      filters.value.categorie === "alle" ||
+      exercise.categorie.includes(filters.value.categorie)
     );
   });
 });
@@ -50,10 +50,10 @@ const setLabel = (categorie: string) => {
 
 // Watch for changes in route query and update filters
 watch(
-    () => route.query.categorie,
-    (newCategorie) => {
-      filters.value.categorie = newCategorie || "";
-    }
+  () => route.query.categorie,
+  (newCategorie) => {
+    filters.value.categorie = newCategorie || "";
+  }
 );
 
 // Navigate to a new category
@@ -68,14 +68,14 @@ const navigateToCategory = (categorie: string) => {
   <v-container v-if="filters.categorie === ''">
     <v-row>
       <v-col
-          v-for="(option, index) in categorieOptions"
-          :key="index"
-          cols="6"
+        v-for="(option, index) in categorieOptions"
+        :key="index"
+        cols="6"
       >
         <v-card
-            min-height="120"
-            :color="index === 0 ? 'blue-darken-3' : undefined"
-            @click="navigateToCategory(option.value)"
+          min-height="120"
+          :color="index === 0 ? 'blue-darken-3' : undefined"
+          @click="navigateToCategory(option.value)"
         >
           <v-card-title class="text-center text-h6 text-wrap">{{ setLabel(option.value) }}</v-card-title>
         </v-card>
@@ -84,18 +84,19 @@ const navigateToCategory = (categorie: string) => {
   </v-container>
 
 
-  <!-- Filtered Exercises -->
-  <v-container v-else>
-    <v-card>
-      <v-card-title>Huidige selectie: {{ setLabel(filters.categorie) }}</v-card-title>
+  <div v-else>
+    <!-- Filtered Exercises -->
+    <v-container>
+      <v-card>
+        <v-card-title class="text-center text-wrap">Selectie: {{ setLabel(filters.categorie) }}</v-card-title>
 
-      <v-card-actions>
-        <v-btn @click="router.push('/oefeningen')">Andere categorie kiezen</v-btn>
-      </v-card-actions>
-    </v-card>
-
+        <v-card-actions class="d-flex justify-center">
+          <v-btn @click="router.push('/oefeningen')">Andere categorie kiezen</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-container>
     <ExerciseFiltering :exercises="filteredExercises"/>
-  </v-container>
+  </div>
 </template>
 
 <style scoped>
