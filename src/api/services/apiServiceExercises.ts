@@ -4,7 +4,7 @@ import { exerciseDao } from "../dao/exercise_dao";
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
-    "Content-Type": "application/json",
+    "x-api-key": import.meta.env.VITE_API_KEY,
   },
 });
 

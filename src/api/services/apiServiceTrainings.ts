@@ -1,10 +1,10 @@
 import axios from "axios";
-import {trainingDao} from "@/api/dao/training_dao";
+import { trainingDao } from "@/api/dao/training_dao";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
-    "Content-Type": "application/json",
+    "x-api-key": import.meta.env.VITE_API_KEY,
   },
 });
 
@@ -74,7 +74,10 @@ export const apiServiceTrainings = {
   },
 
   // Update an existing training
-  async updateTraining(id: string, trainingData: Partial<trainingDao>): Promise<trainingDao> {
+  async updateTraining(
+    id: string,
+    trainingData: Partial<trainingDao>
+  ): Promise<trainingDao> {
     try {
       const response = await axiosInstance.put(`/training/${id}`, trainingData);
       return mapToTrainingDao(response.data);
