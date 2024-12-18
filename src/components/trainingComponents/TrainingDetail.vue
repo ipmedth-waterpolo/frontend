@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
+
 defineProps({
   training: {
     type: Object,
@@ -26,14 +28,15 @@ defineProps({
     <v-card-text>
       <p><strong>Description:</strong> {{ training.beschrijving }}</p>
 
-      <!-- Exercises -->
-      <p v-if="training.oefeningIDs && JSON.parse(training.oefeningIDs).length">
-        <strong>Exercises:</strong>
-        {{ JSON.parse(training.oefeningIDs).join(", ") }}
-      </p>
 
       <!-- Total Duration -->
       <p><strong>Total Duration:</strong> {{ training.totale_duur }} minutes</p>
+
+      <!-- Exercises -->
+      <div v-if="training.oefeningen">
+<!--        {{training.oefeningen}}-->
+        <ExerciseList :exercises="training.oefeningen" />
+      </div>
     </v-card-text>
 
   </v-card>

@@ -9,6 +9,7 @@ export class trainingDao {
   totale_duur: number;
   created_at: string;
   updated_at: string;
+  oefeningen: any[] = [];
 
   constructor(
     id: string,
@@ -20,7 +21,8 @@ export class trainingDao {
     totale_duur: number,
     created_at: string,
     updated_at: string,
-    ratings: number | null = null
+    ratings: number | null = null,
+    oefeningen: any[] = []
   ) {
     this.id = id;
     this.name = name;
@@ -32,5 +34,6 @@ export class trainingDao {
     this.totale_duur = totale_duur;
     this.created_at = created_at;
     this.updated_at = updated_at;
+    this.oefeningen = oefeningen;
   }
 }
