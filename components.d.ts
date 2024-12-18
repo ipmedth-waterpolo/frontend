@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CreateExercise: typeof import('./src/components/exerciseComponents/CreateExercise.vue')['default']
     Exercise: typeof import('./src/components/exerciseComponents/Exercise.vue')['default']
     ExerciseCategoryFilter: typeof import('./src/components/exerciseComponents/ExerciseCategoryFilter.vue')['default']
     ExerciseDetail: typeof import('./src/components/exerciseComponents/ExerciseDetail.vue')['default']
@@ -17,6 +18,9 @@ declare module 'vue' {
     PageContent: typeof import('./src/components/PageContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Training: typeof import('./src/components/trainingComponents/Training.vue')['default']
+    TrainingDetail: typeof import('./src/components/trainingComponents/TrainingDetail.vue')['default']
+    TrainingList: typeof import('./src/components/trainingComponents/TrainingList.vue')['default']
     Welkom: typeof import('./src/components/Welkom.vue')['default']
   }
 }

@@ -21,8 +21,6 @@ const allRouteItems = [
   {title: 'Training maken', to: '/oefeningen'},
   {title: 'Mijn Trainingen', to: '/mijn-trainingen'},
   {title: 'About', to: '/about'},
-  {title: 'Contact', to: '/contact'},
-  {title: 'Help', to: '/help'},
   {title: 'Account', to: '/account'},
 ]
 
