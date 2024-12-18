@@ -1,5 +1,5 @@
-import {exerciseDao} from "@/api/dao/exercise_dao";
-import {inject, ref} from "vue";
+import { exerciseDao } from "@/api/dao/exercise_dao";
+import { inject, ref } from "vue";
 
 export function useExercises() {
   const apiServiceExercises = inject("apiServiceExercises") as {
@@ -48,8 +48,7 @@ export function useExercises() {
 
   const createExercise = async (newExercise: Record<string, any>) => {
     try {
-      const createdExercise = await apiServiceExercises.createExercise(newExercise);
-      exercises.value.push(createdExercise); // Voeg de nieuwe oefening toe aan de bestaande lijst
+      await apiServiceExercises.createExercise(newExercise);
     } catch (err) {
       error.value =
         "Er is een fout opgetreden bij het toevoegen van de oefening";

@@ -61,17 +61,13 @@ export const apiServiceExercises = {
         }
     },
 
-    async createExercise(newExercise: Record<string, any>): Promise<any> {
-        try {
-            console.log("POST Request Payload:", newExercise); // Debug payload
-            const response = await axiosInstance.post("/data", newExercise);
-            console.log("POST Response:", response.data); // Debug server response
-            return response.data;
-        } catch (error: any) {
-            console.error("Fout bij POST-verzoek:", error.message);
-            console.error("Response status:", error.response?.status);
-            console.error("Response data:", error.response?.data);
-            throw error;
-        }
-    },
+  //Add exercise to DB
+  async createExercise(newExercise: unknown): Promise<any> {
+    try {
+      const response = await axiosInstance.post("/data", newExercise);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
