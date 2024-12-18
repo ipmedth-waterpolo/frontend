@@ -1,5 +1,5 @@
 import axios from "axios";
-import {trainingDao} from "@/api/dao/training_dao";
+import { trainingDao } from "@/api/dao/training_dao";
 
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
@@ -8,18 +8,19 @@ const axiosInstance = axios.create({
     },
 });
 
-const mapToTrainingDao = (training: trainingDao): trainingDao => {
+// Map API response object to trainingDao
+const mapToTrainingDao = (training: any): trainingDao => {
     return new trainingDao(
         training.id,
         training.name,
-        training.enabled,
+        !!training.enabled, // Ensure boolean type
         training.beschrijving,
         training.oefeningIDs,
-        training.userID,
+        training.userID.toString(), // Ensure string type
         training.totale_duur,
         training.created_at,
         training.updated_at,
-        training.ratings
+        training.ratings ?? null // Handle null ratings
     );
 };
 
@@ -28,8 +29,10 @@ export const apiServiceTrainings = {
     async getTrainings(): Promise<trainingDao[]> {
         try {
             const response = await axiosInstance.get("/training");
-            return response.data.map(mapToTrainingDao);
+            // Extract and map the `data` array
+            return response.data.data.map(mapToTrainingDao);
         } catch (error) {
+            console.error("Error fetching trainings:", error);
             throw error;
         }
     },
@@ -38,8 +41,10 @@ export const apiServiceTrainings = {
     async getTrainingById(id: string): Promise<trainingDao> {
         try {
             const response = await axiosInstance.get(`/training/${id}`);
-            return mapToTrainingDao(response.data);
+            // Extract and map the single training object
+            return mapToTrainingDao(response.data.data);
         } catch (error) {
+            console.error("Error fetching training by ID:", error);
             throw error;
         }
     },
@@ -56,8 +61,9 @@ export const apiServiceTrainings = {
     }): Promise<trainingDao> {
         try {
             const response = await axiosInstance.post("/training", trainingData);
-            return mapToTrainingDao(response.data);
+            return mapToTrainingDao(response.data.data);
         } catch (error) {
+            console.error("Error creating training:", error);
             throw error;
         }
     },
@@ -69,8 +75,9 @@ export const apiServiceTrainings = {
     ): Promise<trainingDao> {
         try {
             const response = await axiosInstance.put(`/training/${id}`, trainingData);
-            return mapToTrainingDao(response.data);
+            return mapToTrainingDao(response.data.data);
         } catch (error) {
+            console.error("Error updating training:", error);
             throw error;
         }
     },
@@ -80,6 +87,7 @@ export const apiServiceTrainings = {
         try {
             await axiosInstance.delete(`/training/${id}`);
         } catch (error) {
+            console.error("Error deleting training:", error);
             throw error;
         }
     },
