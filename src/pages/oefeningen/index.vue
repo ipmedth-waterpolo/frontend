@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import PageContent from "@/components/PageContent.vue";
-import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
+import ExerciseFiltering from "@/components/exerciseComponents/ExerciseFiltering.vue";
 import { useExercises } from "@/composable/useExercises";
 import { onMounted } from "vue";
 import ExerciseCategoryFilter from "@/components/exerciseComponents/ExerciseCategoryFilter.vue";
@@ -17,7 +17,6 @@ onMounted(() => {
   <PageContent>
     <div v-if="error">error retrieving exercises</div>
     <ExerciseCategoryFilter v-else :exercises />
-<!--    <ExerciseFiltering :exercises="exercises" />-->
   </PageContent>
 </template>
 

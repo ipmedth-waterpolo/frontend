@@ -2,10 +2,12 @@
 import ExerciseDetail from "@/components/exerciseComponents/ExerciseDetail.vue";
 import { useExercises } from "@/composable/useExercises";
 import { onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
-const { exercise, error, fetchExerciseById } = useExercises();
+const { exercise, error, fetchExerciseById, deleteExerciseById } =
+  useExercises();
 const route = useRoute();
+const router = useRouter();
 
 onMounted(() => {
   const exerciseId = route.params.id as string;
@@ -16,6 +18,9 @@ onMounted(() => {
 <template>
   <div v-if="exercise">
     <ExerciseDetail :exercise="exercise" />
+    <button @click="deleteExerciseById(exercise.id).then(() => router.back())">
+      Verwijder oefening
+    </button>
   </div>
 </template>
 
