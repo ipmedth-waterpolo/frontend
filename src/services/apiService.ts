@@ -2,8 +2,10 @@ import axios from "axios";
 import { exerciseDao } from "../dao/exercise_dao";
 
 const axiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:8000/api",
-  // baseURL: "https://waterpolo-planner.wptraining.info/api",
+  baseURL: import.meta.env.VITE_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 const mapToExerciseDao = (exercise: {
@@ -74,6 +76,20 @@ export const apiService = {
     try {
       await axiosInstance.delete(`/data/${id}`);
     } catch (error) {
+      throw error;
+    }
+  },
+
+  async createExercise(newExercise: Record<string, any>): Promise<any> {
+    try {
+      console.log("POST Request Payload:", newExercise); // Debug payload
+      const response = await axiosInstance.post("/data", newExercise);
+      console.log("POST Response:", response.data); // Debug server response
+      return response.data;
+    } catch (error: any) {
+      console.error("Fout bij POST-verzoek:", error.message);
+      console.error("Response status:", error.response?.status);
+      console.error("Response data:", error.response?.data);
       throw error;
     }
   },

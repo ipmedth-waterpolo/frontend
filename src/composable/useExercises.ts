@@ -6,6 +6,7 @@ export function useExercises() {
     getExercises: () => Promise<exerciseDao[]>;
     getExerciseById: (id: string) => Promise<exerciseDao>;
     deleteExercise: (id: string) => Promise<void>;
+    createExercise: (newExercise: Record<string, any>) => Promise<exerciseDao>;
   };
 
   const exercises = ref<exerciseDao[]>([]);
@@ -15,6 +16,7 @@ export function useExercises() {
   const fetchExercises = async () => {
     try {
       const data = await apiService.getExercises();
+      console.log("Fetched exercises:", data);
       exercises.value = data;
     } catch (err) {
       error.value =
@@ -47,6 +49,17 @@ export function useExercises() {
     }
   };
 
+  const createExercise = async (newExercise: Record<string, any>) => {
+    try {
+      const createdExercise = await apiService.createExercise(newExercise);
+      exercises.value.push(createdExercise); // Voeg de nieuwe oefening toe aan de bestaande lijst
+    } catch (err) {
+      error.value =
+        "Er is een fout opgetreden bij het toevoegen van de oefening";
+      console.error(err);
+    }
+  };
+
   return {
     exercises,
     exercise,
@@ -54,5 +67,6 @@ export function useExercises() {
     fetchExercises,
     fetchExerciseById,
     deleteExerciseById,
+    createExercise,
   };
 }
