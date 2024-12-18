@@ -1,5 +1,12 @@
+import axios from "axios";
 import {trainingDao} from "@/api/dao/training_dao";
-import {axiosInstance} from "./env-route";
+
+const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 const mapToTrainingDao = (training: {
   id: string;

@@ -35,7 +35,7 @@ export function useExercises() {
 
   const deleteExerciseById = async (id: string) => {
     try {
-      await apiService.deleteExercise(id);
+      await apiServiceExercises.deleteExercise(id);
       exercises.value = exercises.value.filter(
         (exercise) => exercise.id !== id
       );

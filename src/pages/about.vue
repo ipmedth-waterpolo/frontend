@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { apiService } from "@/services/apiService";
-import { useExercises } from "@/composable/useExercises";
+import { apiServiceExercises } from "@/api/services/apiServiceExercises";
+import { useExercises } from "@/api/composable/useExercises";
 
 const isSuccess = ref(false);
 const errorMessage = ref(""); // Houd foutmelding bij voor debug
