@@ -8,7 +8,17 @@ const axiosInstance = axios.create({
     },
 });
 
-const mapToExerciseDao = (exercise: exerciseDao): exerciseDao => {
+axiosInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("authToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+})
+
+const mapToExerciseDao = (exercise: any): exerciseDao => {
     return new exerciseDao(
         exercise.id,
         exercise.name,
