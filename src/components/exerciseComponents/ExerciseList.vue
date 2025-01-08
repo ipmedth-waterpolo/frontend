@@ -1,12 +1,10 @@
 <script setup lang="ts">
+import type { exerciseDao } from "@/api/dao/exercise_dao";
 import Exercise from "@/components/exerciseComponents/Exercise.vue";
 
-defineProps({
-  exercises: {
-    type: Array,
-    required: true,
-  },
-})
+defineProps<{
+  exercises: exerciseDao[];
+}>();
 </script>
 
 <template>
@@ -20,7 +18,7 @@ defineProps({
         md="6"
         lg="4"
       >
-        <Exercise :exercise/>
+        <Exercise :exercise />
       </v-col>
     </v-row>
   </v-container>
@@ -29,4 +27,3 @@ defineProps({
 <style scoped>
 /* Add any custom styles here */
 </style>
-
