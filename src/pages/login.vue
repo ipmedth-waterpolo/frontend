@@ -2,7 +2,12 @@
   <v-app-bar>
     <v-app-bar-title>Waterpolo Planner</v-app-bar-title>
   </v-app-bar>
-  <PageContent>
+  <v-container
+    fluid
+    fill-height
+    class="align-content-center"
+    height="100%"
+  >
     <v-card
       max-width="500"
       class="elevation-8 mx-auto"
@@ -18,13 +23,23 @@
       <v-card-text>
         <form
           ref="form"
-          @submit.prevent="isRegister ? register() : login()"
+          @submit.prevent="handleSubmit"
         >
+          <v-text-field
+            v-if="isRegister"
+            v-model="name"
+            name="name"
+            label="Naam"
+            type="text"
+            placeholder="Naam"
+            required
+          />
+
           <v-text-field
             v-model="email"
             name="email"
             label="E-mail"
-            type="text"
+            type="email"
             placeholder="user@example.com"
             required
           />
@@ -56,7 +71,6 @@
             type="submit"
             class="mt-4"
             color="primary"
-            value="log in"
           >
             {{ isRegister ? stateObj.register.name : stateObj.login.name }}
           </v-btn>
@@ -64,24 +78,34 @@
           <div
             class="grey--text mt-4"
             style="cursor: pointer;"
-            @click="isRegister = !isRegister"
+            @click="toggleForm"
           >
             {{ toggleMessage }}
           </div>
         </form>
       </v-card-text>
     </v-card>
-  </PageContent>
+  </v-container>
 </template>
 
 <script lang="ts">
-import PageContent from "@/components/PageContent.vue";
+import { defineComponent } from "vue";
+import axios from "axios";
 
-export default {
+const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  headers: {
+    "x-api-key": import.meta.env.VITE_API_KEY,
+  },
+  withCredentials: false,
+});
+
+export default defineComponent({
   name: "Login",
-  components: {PageContent},
+  emits: ["loginSuccess"],
   data() {
     return {
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -107,19 +131,56 @@ export default {
     },
   },
   methods: {
-    login() {
-      const {email} = this;
-      console.log(email + " logged in");
+    toggleForm() {
+      this.isRegister = !this.isRegister;
+      this.errorMessage = ""; // Clear error message when toggling
     },
-    register() {
-      if (this.password === this.confirmPassword) {
-        this.isRegister = false;
-        this.errorMessage = "";
-        this.$refs.form.reset();
+    async handleSubmit() {
+      if (this.isRegister) {
+        await this.register();
       } else {
-        this.errorMessage = "Wachtwoorden komen niet overeen";
+        await this.login();
+      }
+    },
+    async login() {
+      try {
+        const data = {
+          email: this.email,
+          password: this.password,
+        };
+        const response = await axiosInstance.post("/login", data);
+        console.log(response.data);
+        const { token } = response.data;
+
+        // Save the token in localStorage
+        localStorage.setItem("authToken", token);
+
+        // Notify parent component of successful login
+        this.$emit("loginSuccess", token);
+
+        this.errorMessage = ""; // Clear error message
+      } catch (err) {
+        this.errorMessage = (err.response?.data?.message || "") + ", Login failed.";
+      }
+    },
+    async register() {
+      try {
+        const data = {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          password_confirmation: this.confirmPassword,
+        };
+        const response = await axiosInstance.post("/register", data);
+        console.log(response.data);
+
+        this.isRegister = false; // Switch to login view
+        this.errorMessage = ""; // Clear error message
+        this.$refs.form.reset(); // Reset the form
+      } catch (err) {
+        this.errorMessage = (err.response?.data?.message || "") + ", Register failed.";
       }
     },
   },
-};
+});
 </script>

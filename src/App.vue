@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <login v-if="!loggedIn" />
+    <login v-if="!loggedIn" @loginSuccess="onLoginSuccess"/>
 
     <RouterNav
       v-if="loggedIn"
@@ -10,11 +10,17 @@
 </template>
 
 <script setup lang="ts">
+import {ref, computed} from "vue";
 import RouterNav from "@/RouterNav.vue";
 import Login from "@/pages/login.vue";
 
-const loggedIn = true;
+const token = ref(localStorage.getItem('authToken'));
+const loggedIn = computed(() => token.value !== null);
 
+function onLoginSuccess(newToken: string) {
+  token.value = newToken;
+  localStorage.setItem('authToken', newToken);
+}
 
 const allRouteItems = [
   {title: 'Home', to: '/'},
@@ -22,12 +28,13 @@ const allRouteItems = [
   {title: 'Mijn Trainingen', to: '/mijn-trainingen'},
   {title: 'About', to: '/about'},
   {title: 'Account', to: '/account'},
-]
-
+];
 </script>
 
 <script lang="ts">
 export default {
-  data: () => ({ drawer: null }),
+  data: () => ({
+    drawer: null
+  })
 };
 </script>

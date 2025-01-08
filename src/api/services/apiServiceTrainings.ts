@@ -8,6 +8,16 @@ const axiosInstance = axios.create({
     },
 });
 
+axiosInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("authToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+})
+
 // Map API response object to trainingDao
 const mapToTrainingDao = (training: any, oefeningen: exerciseDao[] = []): trainingDao => {
     return new trainingDao(
