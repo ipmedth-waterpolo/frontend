@@ -89,7 +89,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 import axios from "axios";
 
 const axiosInstance = axios.create({
@@ -150,7 +150,7 @@ export default defineComponent({
         };
         const response = await axiosInstance.post("/login", data);
         console.log(response.data);
-        const { token } = response.data;
+        const {token} = response.data;
 
         // Save the token in localStorage
         localStorage.setItem("authToken", token);
@@ -159,7 +159,7 @@ export default defineComponent({
         this.$emit("loginSuccess", token);
 
         this.errorMessage = ""; // Clear error message
-      } catch (err) {
+      } catch (err: any) {
         this.errorMessage = (err.response?.data?.message || "") + ", Login failed.";
       }
     },
@@ -176,8 +176,8 @@ export default defineComponent({
 
         this.isRegister = false; // Switch to login view
         this.errorMessage = ""; // Clear error message
-        this.$refs.form.reset(); // Reset the form
-      } catch (err) {
+        (this.$refs.form as HTMLFormElement).reset(); // Reset the form
+      } catch (err: any) {
         this.errorMessage = (err.response?.data?.message || "") + ", Register failed.";
       }
     },
