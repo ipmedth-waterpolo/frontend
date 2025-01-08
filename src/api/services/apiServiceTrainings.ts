@@ -1,5 +1,6 @@
 import axios from "axios";
 import { trainingDao } from "@/api/dao/training_dao";
+import { exerciseDao } from "@/api/dao/exercise_dao";
 
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,

@@ -1,33 +1,27 @@
 <script setup lang="ts">
+import type { trainingDao } from "@/api/dao/training_dao";
 import Training from "@/components/trainingComponents/Training.vue";
 
-defineProps({
-  trainings: {
-    type: Array,
-    required: true,
-  },
-})
-
+defineProps<{
+  trainings: trainingDao[];
+}>();
 </script>
 
 <template>
   <v-container>
     <v-row>
       <v-col
-          v-for="training in trainings"
-          :key="training.id"
-          cols="12"
-          sm="12"
-          md="6"
-          lg="4"
+        v-for="training in trainings"
+        :key="training.id"
+        cols="12"
+        sm="12"
+        md="6"
+        lg="4"
       >
-        <Training :training/>
+        <Training :training />
       </v-col>
     </v-row>
   </v-container>
-
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
