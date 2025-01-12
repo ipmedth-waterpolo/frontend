@@ -90,7 +90,7 @@ onMounted(() => {
         <v-icon icon="mdi-basket-outline"/>
         {{ selectedExerciseIDs.length }}
       </v-banner-text>
-      <v-btn color="white" base-color="white" variant="text">
+      <v-btn color="white" base-color="white" variant="text" @click="$router.push('/oefeningen/training-maken')">
         Naar selectie
         <v-icon icon="mdi-arrow-right"/>
       </v-btn>
