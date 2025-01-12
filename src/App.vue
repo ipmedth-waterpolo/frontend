@@ -31,10 +31,10 @@ const allRouteItems = [
 ];
 </script>
 
-<script lang="ts">
-export default {
-  data: () => ({
-    drawer: null
-  })
-};
-</script>
+<!--<script lang="ts">-->
+<!--export default {-->
+<!--  data: () => ({-->
+<!--    drawer: null-->
+<!--  })-->
+<!--};-->
+<!--</script>-->
