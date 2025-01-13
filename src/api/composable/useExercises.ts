@@ -1,5 +1,6 @@
-import {exerciseDao} from "@/api/dao/exercise_dao";
-import {inject, ref} from "vue";
+import { exerciseDao } from "@/api/dao/exercise_dao";
+import { inject, ref } from "vue";
+// import { userService } from "../services/userService";
 
 export function useExercises() {
   const apiServiceExercises = inject("apiServiceExercises") as {
@@ -35,20 +36,23 @@ export function useExercises() {
 
   const deleteExerciseById = async (id: string) => {
     try {
+      // localStorage.getItem("role");
       await apiServiceExercises.deleteExercise(id);
       exercises.value = exercises.value.filter(
         (exercise) => exercise.id !== id
       );
     } catch (err) {
       error.value =
-        "Er is een fout opgetreden bij het verwijderen van de desbetreffende oefening";
+        "Er is een fout opgetreden bij het verwijderen van de oefening";
       console.error(err);
     }
   };
 
   const createExercise = async (newExercise: Record<string, any>) => {
     try {
-      const createdExercise = await apiServiceExercises.createExercise(newExercise);
+      const createdExercise = await apiServiceExercises.createExercise(
+        newExercise
+      );
       exercises.value.push(createdExercise); // Voeg de nieuwe oefening toe aan de bestaande lijst
     } catch (err) {
       error.value =
