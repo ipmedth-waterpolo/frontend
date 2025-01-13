@@ -72,8 +72,9 @@ export const apiServiceTrainings = {
         ratings?: number | null;
     }): Promise<trainingDao> {
         try {
-            const response = await axiosInstance.post("/training", trainingData);
-            return mapToTrainingDao(response.data.data.training);
+            const response = await axiosInstance.post("/trainings", trainingData);
+            return mapToTrainingDao(response.data.data);
+            //dit is dom dat dit niet ook data.data.training is, fix dit in back-end????
         } catch (error) {
             console.error("Error creating training:", error);
             throw error;
