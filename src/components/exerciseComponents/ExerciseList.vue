@@ -44,15 +44,15 @@ onMounted(() => {
 
 
 <template>
-  <v-container>
+  <v-container max-width="900">
     <v-row>
       <v-col
         v-for="exercise in exercises"
         :key="exercise.id"
         cols="12"
         sm="12"
-        md="6"
-        lg="4"
+        md="12"
+        lg="12"
       >
 
         <v-row class="align-center">
