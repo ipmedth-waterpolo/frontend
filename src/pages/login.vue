@@ -158,6 +158,7 @@ export default defineComponent({
         // Notify parent component of successful login
         this.$emit("loginSuccess", token);
 
+        await this.saveUserData();
         this.errorMessage = ""; // Clear error message
       } catch (err: any) {
         this.errorMessage = (err.response?.data?.message || "") + ", Login failed.";
@@ -179,6 +180,30 @@ export default defineComponent({
         (this.$refs.form as HTMLFormElement).reset(); // Reset the form
       } catch (err: any) {
         this.errorMessage = (err.response?.data?.message || "") + ", Register failed.";
+      }
+    },
+    async saveUserData() {
+      try {
+        axiosInstance.interceptors.request.use(
+          (config) => {
+            const token = localStorage.getItem("authToken");
+            if (token) {
+              config.headers.Authorization = `Bearer ${token}`;
+            }
+            return config;
+          },
+          (error) => {
+            return Promise.reject(error);
+          }
+        );
+        const response = await axiosInstance.get("/user");
+        localStorage.setItem("userID", response.data.user.id);
+        localStorage.setItem("userRole", response.data.user.role);
+        localStorage.setItem("username", response.data.user.name);
+        localStorage.setItem("userEmail", response.data.user.email);
+
+      } catch (err: any) {
+        this.errorMessage = (err.response?.data?.message || "") + ", smth when wrong";
       }
     },
   },
