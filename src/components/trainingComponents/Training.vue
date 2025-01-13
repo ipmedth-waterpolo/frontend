@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <v-card class="ma-3" @click="$router.push({ path: `/mijn-trainingen/${training.id}` })">
+  <v-card class="ma-3" @click="$router.push({ path: `/alle-trainingen/${training.id}` })">
     <!-- Training Name -->
     <v-card-title>{{ training.name }}</v-card-title>
 

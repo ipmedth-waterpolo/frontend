@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { trainingDao } from "@/api/dao/training_dao";
+import type {trainingDao} from "@/api/dao/training_dao";
 import Training from "@/components/trainingComponents/Training.vue";
 
 defineProps<{
@@ -18,10 +18,12 @@ defineProps<{
         md="6"
         lg="4"
       >
-        <Training :training />
+        <Training :training/>
       </v-col>
     </v-row>
   </v-container>
+  <v-card v-if="trainings.length === 0"> Geen trainingen gemaakt</v-card>
+  <!--    hier mss direct linkje naar training aanmaken-->
 </template>
 
 <style scoped></style>
