@@ -26,5 +26,6 @@ declare module 'vue-router/auto-routes' {
     '/mijn-trainingen/[id]': RouteRecordInfo<'/mijn-trainingen/[id]', '/mijn-trainingen/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/oefeningen/': RouteRecordInfo<'/oefeningen/', '/oefeningen', Record<never, never>, Record<never, never>>,
     '/oefeningen/[id]': RouteRecordInfo<'/oefeningen/[id]', '/oefeningen/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/oefeningen/training-maken': RouteRecordInfo<'/oefeningen/training-maken', '/oefeningen/training-maken', Record<never, never>, Record<never, never>>,
   }
 }

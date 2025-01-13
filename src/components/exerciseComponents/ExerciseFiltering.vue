@@ -105,7 +105,7 @@ const filteredExercises = computed(() => {
     <!--    </v-row>-->
   </v-container>
 
-  <ExerciseList :exercises="filteredExercises" />
+  <ExerciseList :exercises="filteredExercises" :showAddButton="true"/>
 </template>
 
 <style scoped></style>
