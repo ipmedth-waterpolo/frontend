@@ -26,15 +26,8 @@ const allRouteItems = [
   {title: 'Home', to: '/'},
   {title: 'Training maken', to: '/oefeningen'},
   {title: 'Mijn Trainingen', to: '/mijn-trainingen'},
+  {title: 'Alle Trainingen', to: '/alle-trainingen'},
   {title: 'About', to: '/about'},
   {title: 'Account', to: '/account'},
 ];
 </script>
-
-<!--<script lang="ts">-->
-<!--export default {-->
-<!--  data: () => ({-->
-<!--    drawer: null-->
-<!--  })-->
-<!--};-->
-<!--</script>-->

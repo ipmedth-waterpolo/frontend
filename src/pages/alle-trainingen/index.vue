@@ -15,7 +15,7 @@ onMounted(() => {
 
 // Filter trainings based on userID
 const myTrainings = computed(() => {
-  return trainings.value.filter((training) => training.userID === userID);
+  return trainings.value.filter((training) => training.userID !== userID);
 });
 </script>
 
