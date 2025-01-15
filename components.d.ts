@@ -14,7 +14,6 @@ declare module 'vue' {
     ExerciseList: typeof import('./src/components/exerciseComponents/ExerciseList.vue')['default']
     ExerciseVisual: typeof import('./src/components/exerciseComponents/ExerciseVisual.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    PageContent: typeof import('./src/components/PageContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Training: typeof import('./src/components/trainingComponents/Training.vue')['default']
