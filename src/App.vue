@@ -26,11 +26,11 @@ function onLoginSuccess(newToken: string) {
 }
 
 const allRouteItems = [
-  {title: 'Home', to: '/'},
-  {title: 'Training maken', to: '/oefeningen'},
-  {title: 'Mijn Trainingen', to: '/mijn-trainingen'},
-  {title: 'Alle Trainingen', to: '/alle-trainingen'},
-  {title: 'About', to: '/about'},
-  {title: 'Account', to: '/account'},
+  {title: 'Home', to: '/', appBarTitle: 'Waterpolo Planner'},
+  {title: 'Training maken', to: '/oefeningen', appBarTitle: 'Training maken'},
+  {title: 'Mijn Trainingen', to: '/mijn-trainingen', appBarTitle: 'Mijn Trainingen'},
+  {title: 'Alle Trainingen', to: '/alle-trainingen', appBarTitle: 'Trainingen'},
+  {title: 'Account', to: '/account', appBarTitle: 'Account'},
+  {title: 'Over ons', to: '/about', appBarTitle: 'Over ons'},
 ];
 </script>
