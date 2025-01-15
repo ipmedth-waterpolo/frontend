@@ -13,6 +13,9 @@
 import {ref, computed} from "vue";
 import RouterNav from "@/RouterNav.vue";
 import Login from "@/pages/login.vue";
+import '@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/js/all.js';
+
 
 const token = ref(localStorage.getItem('authToken'));
 const loggedIn = computed(() => token.value !== null);
