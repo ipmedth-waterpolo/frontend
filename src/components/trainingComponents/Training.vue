@@ -1,45 +1,42 @@
-<!--training list item-->
 <script setup lang="ts">
 defineProps({
   training: {
     type: Object,
     required: true,
   },
-})
+});
 
 const getStarClass = (index: number, rating: number) => {
   return index < rating ? 'fas fa-star' : 'far fa-star';
 };
-
 </script>
 
 <template>
-  <v-card class="ma-3" @click="$router.push({ path: `/alle-trainingen/${training.id}` })">
+  <v-card @click="$router.push({ path: `/alle-trainingen/${training.id}` })"
+  width="450">
     <!-- Training Name -->
     <v-card-title>{{ training.name }}</v-card-title>
 
-    <!-- Subtitle Section -->
-
     <!-- Description -->
     <v-card-text>
-      <p><strong>Description:</strong> {{ training.beschrijving }}</p>
+      <div class="spaced">{{ training.beschrijving }}</div>
 
-      <!-- Total Duration -->
-      <p class="duration"><strong>Total Duration:</strong> {{ training.totale_duur }} minutes</p>
-    </v-card-text>
+      <!-- Duration and Rating -->
+      <div class="duration-rating">
+        <div class="duration">
+          <v-icon icon="mdi-clock-outline" />
+          <span>{{ training.totale_duur }}</span>
+        </div>
 
-    <v-card-subtitle>
-      <p><strong>Rating:</strong></p>
-      <div class="rating">
-        <!-- Render 5 stars and dynamically fill them based on the rating -->
-        <i
-          v-for="index in 5"
-          :key="index"
-          :class="getStarClass(index, training.ratings)"
-        ></i>
+        <div class="rating">
+          <i
+            v-for="index in 5"
+            :key="index"
+            :class="getStarClass(index, training.ratings)"
+          />
+        </div>
       </div>
-    </v-card-subtitle>
-
+    </v-card-text>
   </v-card>
 </template>
 
@@ -47,7 +44,7 @@ const getStarClass = (index: number, rating: number) => {
 .rating {
   display: flex;
   gap: 5px;
-  margin-bottom: 10px;
+  align-items: center;
 }
 
 .fas.fa-star {
@@ -58,8 +55,19 @@ const getStarClass = (index: number, rating: number) => {
   color: #e4e5e9; /* Grey color for empty stars */
 }
 
-.duration{
-  margin-top: 5px;;
+.spaced {
+  margin-bottom: 16px; /* Add vertical spacing between elements */
 }
 
+.duration-rating {
+  display: flex;
+  justify-content: space-between; /* Align duration to the left and rating to the right */
+  align-items: center;
+}
+
+.duration {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between clock icon and duration text */
+}
 </style>

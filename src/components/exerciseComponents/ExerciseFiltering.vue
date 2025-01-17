@@ -10,7 +10,7 @@ const props = defineProps<{
 // Filter Criteria
 const filters = ref({
   categorie: "",
-  leeftijdsgroep: "",
+  leeftijdsgroep: [],
   duur: [0, 240],
   minimumAantalSpelers: [0, 20],
   waterNodig: "",
@@ -37,14 +37,14 @@ const leeftijdsgroepOptions = [
 const filteredExercises = computed(() => {
   return props.exercises.filter((exercise) => {
     return (
-      (filters.value.leeftijdsgroep === "" ||
-        exercise.leeftijdsgroep.includes(filters.value.leeftijdsgroep)) &&
+      filters.value.leeftijdsgroep.length === 0 ||
+      filters.value.leeftijdsgroep.some((filter) =>
+        exercise.leeftijdsgroep.includes(filter))
+      &&
       exercise.duur >= filters.value.duur[0] &&
       exercise.duur <= filters.value.duur[1] &&
-      exercise.minimum_aantal_spelers >=
-        filters.value.minimumAantalSpelers[0] &&
-      exercise.minimum_aantal_spelers <=
-        filters.value.minimumAantalSpelers[1] &&
+      exercise.minimum_aantal_spelers >= filters.value.minimumAantalSpelers[0] &&
+      exercise.minimum_aantal_spelers <= filters.value.minimumAantalSpelers[1] &&
       (filters.value.waterNodig === "" ||
         exercise.water_nodig === (filters.value.waterNodig == "1"))
     );
@@ -77,6 +77,7 @@ const filteredExercises = computed(() => {
               :items="leeftijdsgroepOptions"
               item-value="value"
               item-title="label"
+              multiple
               label="Leeftijdsgroep"
             ></v-select>
 
@@ -93,7 +94,7 @@ const filteredExercises = computed(() => {
             <v-range-slider
               v-model="filters.minimumAantalSpelers"
               :max="20"
-              label="Minimum aantal spelers"
+              label="Minimum spelers"
               thumb-label="always"
               step="1"
             ></v-range-slider>

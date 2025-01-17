@@ -84,21 +84,21 @@ const navigateToCategory = (categorie: string) => {
 
   <div v-else>
     <!-- Filtered Exercises -->
-    <v-container>
-      <v-card>
-        <v-card-title class="text-center text-wrap"
-          >Selectie: {{ setLabel(filters.categorie) }}</v-card-title
-        >
-
-        <v-card-actions class="d-flex justify-center">
-          <v-btn @click="router.push('/oefeningen')"
-            >Andere categorie kiezen</v-btn
+        <v-toolbar density="compact">
+          <v-btn
+            @click="$router.go(-1)"
           >
-        </v-card-actions>
-      </v-card>
-    </v-container>
+            <v-icon size="x-large" icon="mdi-arrow-left" />
+          </v-btn>
+
+          <v-toolbar-title class="text-wrap">
+            Selectie: {{ setLabel(filters.categorie) }}
+          </v-toolbar-title>
+        </v-toolbar>
+
     <ExerciseFiltering :exercises="filteredExercises" />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
