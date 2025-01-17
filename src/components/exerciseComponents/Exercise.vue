@@ -24,13 +24,13 @@ defineProps({
           class="d-flex flex-column flex-md-row align-start align-md-center"
         >
           <!-- Spelers -->
-          <div class="d-flex align-center mr-md-5 mb-2 mb-md-0">
+          <div class="d-flex align-center mr-md-5 mb-2 mb-md-0 pr-4">
             <v-icon class="mr-2" icon="mdi-account-group"/>
             <span>{{ exercise.minimum_aantal_spelers }}</span>
           </div>
 
           <!-- Water Nodig -->
-          <div class="d-flex align-center mr-md-5 mb-2 mb-md-0">
+          <div class="d-flex align-center mr-md-5 mb-2 mb-md-0 pr-4">
             <v-icon
               class="mr-2"
               :icon="exercise.water_nodig ? 'mdi-water-outline' : 'mdi-water-off-outline'"
@@ -53,10 +53,4 @@ defineProps({
 </template>
 
 <style scoped>
-/* Standaard grootte van iconen */
-.v-icon {
-  font-size: 20px;
-}
-
-/* Zorg voor ruimte tussen elementen */
 </style>
