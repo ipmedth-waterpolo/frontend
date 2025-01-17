@@ -14,12 +14,10 @@ declare module 'vue' {
     ExerciseFiltering: typeof import('./src/components/exerciseComponents/ExerciseFiltering.vue')['default']
     ExerciseList: typeof import('./src/components/exerciseComponents/ExerciseList.vue')['default']
     ExerciseVisual: typeof import('./src/components/exerciseComponents/ExerciseVisual.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Training: typeof import('./src/components/trainingComponents/Training.vue')['default']
     TrainingDetail: typeof import('./src/components/trainingComponents/TrainingDetail.vue')['default']
     TrainingList: typeof import('./src/components/trainingComponents/TrainingList.vue')['default']
-    Welkom: typeof import('./src/components/Welkom.vue')['default']
   }
 }
