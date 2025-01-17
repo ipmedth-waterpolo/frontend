@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import PageContent from "@/components/PageContent.vue";
-import { ref, computed, onMounted } from "vue";
-import { useExercises } from "@/api/composable/useExercises";
-import { useTrainings } from "@/api/composable/useTrainings";
+import {ref, computed, onMounted, watch} from "vue";
+import {useExercises} from "@/api/composable/useExercises";
+import {useTrainings} from "@/api/composable/useTrainings";
 import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
+import router from "@/router";
 
-const { exercises, error: exerciseError, fetchExercises } = useExercises();
-const { createTraining, error: trainingError } = useTrainings();
+const {exercises, error: exerciseError, fetchExercises} = useExercises();
+const {createTraining, error: trainingError} = useTrainings();
 
 const formRef = ref(); // Reference to the v-form
 const selectedExerciseIDs = ref<number[]>(
@@ -31,6 +31,25 @@ const selectedExercises = computed(() => {
   );
 });
 
+const totalDuration = computed(() => {
+  return selectedExercises.value.reduce((total, exercise) => {
+    return total + exercise.duur;
+  }, 0);
+});
+
+const exerciseNames = computed(() => {
+  return selectedExercises.value.map((exercise) => exercise.name).join(", ");
+});
+
+watch(exerciseNames, (newValue) => {
+  trainingData.value.beschrijving = newValue;
+});
+
+watch(totalDuration, (newValue) => {
+  trainingData.value.totale_duur = newValue.toString();
+});
+
+
 const addTraining = async () => {
   const isFormValid = formRef.value?.validate(); // Validate the form
 
@@ -49,6 +68,8 @@ const addTraining = async () => {
   try {
     await createTraining(newTraining);
     isSuccess.value = true;
+    localStorage.setItem("selectedExerciseIDs", JSON.stringify([]));
+    await router.push("/mijn-trainingen");
   } catch (err) {
     console.error("Failed to create training:", err);
     isSuccess.value = false;
@@ -57,24 +78,29 @@ const addTraining = async () => {
 </script>
 
 <template>
-  <PageContent>
-    <v-card class="ma-3">
-      <v-card-title>Training aanmaken</v-card-title>
+  <v-container
+    fluid
+    fill-height
+    class="align-content-center"
+    height="100%"
+  >
+    <v-card>
       <v-card-text>
         <v-form ref="formRef" @submit.prevent="addTraining">
           <v-text-field
             v-model="trainingData.name"
             label="Naam van de Training"
+            placeholder="Nieuwe training"
             required
             :rules="[v => !!v || 'Naam is verplicht']"
-          ></v-text-field>
+          />
 
           <v-textarea
             v-model="trainingData.beschrijving"
             label="Beschrijving"
             required
             :rules="[v => !!v || 'Beschrijving is verplicht']"
-          ></v-textarea>
+          />
 
           <v-text-field
             v-model="trainingData.totale_duur"
@@ -82,15 +108,14 @@ const addTraining = async () => {
             type="number"
             required
             :rules="[v => !!v || 'Totale duur is verplicht']"
-          ></v-text-field>
-
-          <div>Geselecteerde oefeningen: {{ selectedExerciseIDs }}</div>
+          />
 
           <v-btn type="submit" color="primary" class="ma-3">
             Training Opslaan
           </v-btn>
         </v-form>
       </v-card-text>
+      <v-card-text>Geselecteerde Oefeningen:</v-card-text>
     </v-card>
 
     <ExerciseList
@@ -102,12 +127,8 @@ const addTraining = async () => {
       Fout bij het laden van oefeningen: {{ exerciseError }}
     </v-alert>
 
-    <v-alert v-if="isSuccess" type="success" dismissible>
-      Training succesvol aangemaakt!
-    </v-alert>
-
     <v-alert v-if="trainingError" type="error" dismissible>
       Fout: {{ trainingError }}
     </v-alert>
-  </PageContent>
+  </v-container>
 </template>
