@@ -4,17 +4,19 @@ import {useExercises} from "@/api/composable/useExercises";
 import {useTrainings} from "@/api/composable/useTrainings";
 import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
 import router from "@/router";
+import ToolbarWithBackButton from "@/components/ToolbarWithBackButton.vue";
 
 export default defineComponent({
   name: "TrainingMaken",
   components: {
+    ToolbarWithBackButton,
     ExerciseList,
   },
   setup() {
     const {exercises, error: exerciseError, fetchExercises} = useExercises();
     const {createTraining, error: trainingError} = useTrainings();
 
-    const formRef = ref(); // Reference to the v-form
+    const formRef = ref();
     const selectedExerciseIDs = ref<number[]>(
       JSON.parse(localStorage.getItem("selectedExerciseIDs") || "[]")
     );
@@ -57,8 +59,13 @@ export default defineComponent({
     });
 
     const tryToAddTraining = async () => {
+      selectedExerciseIDs.value = JSON.parse(localStorage.getItem("selectedExerciseIDs") || "[]");
       if (!trainingData.value.name || !trainingData.value.beschrijving || !trainingData.value.totale_duur) {
         errorMessage.value = "Alle velden zijn verplicht!";
+        return;
+      }
+      if (selectedExerciseIDs.value.length === 0) {
+        errorMessage.value = "Voeg minimaal 1 oefening toe!";
         return;
       }
       errorMessage.value = ""; // Clear error message if validation passes
@@ -78,6 +85,8 @@ export default defineComponent({
         isSuccess.value = true;
         localStorage.setItem("selectedExerciseIDs", JSON.stringify([]));
         await router.push("/mijn-trainingen");
+        await new Promise(r => setTimeout(r, 100));
+        router.go(0);
       } catch (err) {
         console.error("Failed to create training:", err);
         errorMessage.value = "Er is iets misgegaan bij het opslaan van de training.";
@@ -102,6 +111,7 @@ export default defineComponent({
 </script>
 
 <template>
+  <ToolbarWithBackButton>Nieuwe Training</ToolbarWithBackButton>
   <v-container
     fluid
     fill-height
@@ -145,13 +155,14 @@ export default defineComponent({
     </v-card>
     <v-card class="mt-2">
       <v-card-title>
-        Geselecteerde Oefeningen:
+        {{ selectedExercises.length }} Geselecteerde oefeningen:
       </v-card-title>
     </v-card>
 
     <ExerciseList
       v-if="exercises && exercises.length > 0"
       :exercises="selectedExercises"
+      :show-add-button="true"
     />
 
     <v-alert v-if="exerciseError" type="error">
