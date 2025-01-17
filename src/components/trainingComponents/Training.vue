@@ -12,8 +12,7 @@ const getStarClass = (index: number, rating: number) => {
 </script>
 
 <template>
-  <v-card @click="$router.push({ path: `/alle-trainingen/${training.id}` })"
-  width="450">
+  <v-card @click="$router.push({ path: `/alle-trainingen/${training.id}` })">
     <!-- Training Name -->
     <v-card-title>{{ training.name }}</v-card-title>
 
@@ -56,18 +55,23 @@ const getStarClass = (index: number, rating: number) => {
 }
 
 .spaced {
-  margin-bottom: 16px; /* Add vertical spacing between elements */
+  margin-bottom: 16px;
 }
 
 .duration-rating {
   display: flex;
-  justify-content: space-between; /* Align duration to the left and rating to the right */
+  justify-content: space-between;
   align-items: center;
 }
 
 .duration {
   display: flex;
   align-items: center;
-  gap: 8px; /* Space between clock icon and duration text */
+  gap: 8px;
+}
+
+v-card {
+  max-width: 450px;
+  margin: auto;
 }
 </style>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { trainingDao } from "@/api/dao/training_dao";
+import type {trainingDao} from "@/api/dao/training_dao";
 import Training from "@/components/trainingComponents/Training.vue";
-import { computed, ref } from "vue";
+import {computed, ref} from "vue";
 
 const props = defineProps<{
   trainings: trainingDao[];
@@ -29,9 +29,8 @@ const displayedTrainings = computed(() => {
   }
 });
 </script>
-
 <template>
-  <v-container class="justify-center">
+  <v-container max-width="900">
     <!-- Centering the v-select -->
     <div class="d-flex justify-center">
       <v-select
@@ -52,28 +51,44 @@ const displayedTrainings = computed(() => {
       />
     </div>
 
-    <!-- Centering the v-row -->
-      <v-col
-        v-for="training in displayedTrainings"
-        :key="training.id"
-        cols="12"
-        sm="12"
-        md="6"
-        lg="4"
-        class="d-flex justify-center"
-      >
-        <Training :training="training"/>
-      </v-col>
+    <!-- Centering the rows of trainings -->
+    <div class="d-flex flex-wrap justify-center">
+      <v-row class="justify-center">
+        <v-col
+          v-for="training in displayedTrainings"
+          :key="training.id"
+          cols="12"
+          sm="12"
+          md="6"
+        >
+          <Training :training="training"/>
+        </v-col>
+      </v-row>
+    </div>
 
+    <!-- Empty state message -->
     <v-row class="d-flex justify-center">
-    <v-card v-if="trainings.length === 0" class="d-flex justify-center mt-6 px-8" max-width="500">
-      <v-card-title>Geen trainingen gevonden</v-card-title>
-    </v-card>
+      <v-card
+        v-if="trainings.length === 0"
+        class="d-flex justify-center mt-6 px-8"
+        max-width="500"
+      >
+        <v-card-title>Geen trainingen gevonden</v-card-title>
+      </v-card>
     </v-row>
+
+    <!-- Button to create a new training -->
     <v-row class="d-flex justify-center">
-    <v-btn @click="$router.push('/oefeningen')" class="mt-6 pa-6 justify-center align-content-center" color="primary">Nieuwe training aanmaken</v-btn>
+      <v-btn
+        @click="$router.push('/oefeningen')"
+        class="mt-6 pa-6 justify-center align-content-center"
+        color="primary"
+      >
+        Nieuwe training aanmaken
+      </v-btn>
     </v-row>
   </v-container>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
