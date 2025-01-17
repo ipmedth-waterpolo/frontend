@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import PageContent from "@/components/PageContent.vue";
 import TrainingList from "@/components/trainingComponents/TrainingList.vue";
 import { useTrainings } from "@/api/composable/useTrainings";
 import { computed, onMounted } from "vue";
@@ -21,10 +20,8 @@ const myTrainings = computed(() => {
 
 
 <template>
-  <PageContent>
     <TrainingList :trainings="myTrainings"/>
 
-  </PageContent>
 </template>
 
 <style scoped>

@@ -1,93 +1,3 @@
-<template>
-  <v-app-bar>
-    <v-app-bar-title>Waterpolo Planner</v-app-bar-title>
-  </v-app-bar>
-  <v-container
-    fluid
-    fill-height
-    class="align-content-center"
-    height="100%"
-  >
-    <v-card
-      max-width="500"
-      class="elevation-8 mx-auto"
-    >
-      <v-toolbar
-        dark
-        color="primary"
-      >
-        <v-toolbar-title>
-          {{ isRegister ? stateObj.register.name : stateObj.login.name }}
-        </v-toolbar-title>
-      </v-toolbar>
-      <v-card-text>
-        <form
-          ref="form"
-          @submit.prevent="handleSubmit"
-        >
-          <v-text-field
-            v-if="isRegister"
-            v-model="name"
-            name="name"
-            label="Naam"
-            type="text"
-            placeholder="Naam"
-            required
-          />
-
-          <v-text-field
-            v-model="email"
-            name="email"
-            label="E-mail"
-            type="email"
-            placeholder="user@example.com"
-            required
-          />
-
-          <v-text-field
-            v-model="password"
-            name="password"
-            label="Wachtwoord"
-            type="password"
-            placeholder="password"
-            required
-          />
-
-          <v-text-field
-            v-if="isRegister"
-            v-model="confirmPassword"
-            name="confirmPassword"
-            label="Wachtwoord bevestigen"
-            type="password"
-            placeholder="wachtwoord"
-            required
-          />
-
-          <div class="red--text">
-            {{ errorMessage }}
-          </div>
-
-          <v-btn
-            type="submit"
-            class="mt-4"
-            color="primary"
-          >
-            {{ isRegister ? stateObj.register.name : stateObj.login.name }}
-          </v-btn>
-
-          <div
-            class="grey--text mt-4"
-            style="cursor: pointer;"
-            @click="toggleForm"
-          >
-            {{ toggleMessage }}
-          </div>
-        </form>
-      </v-card-text>
-    </v-card>
-  </v-container>
-</template>
-
 <script lang="ts">
 import {defineComponent} from "vue";
 import axios from "axios";
@@ -209,3 +119,94 @@ export default defineComponent({
   },
 });
 </script>
+
+<template>
+  <v-app-bar>
+    <v-app-bar-title>Waterpolo Planner</v-app-bar-title>
+  </v-app-bar>
+  <v-container
+    fluid
+    fill-height
+    class="align-content-center"
+    height="100%"
+  >
+    <v-card
+      max-width="500"
+      class="elevation-8 mx-auto"
+    >
+      <v-toolbar
+        dark
+        color="primary"
+      >
+        <v-toolbar-title>
+          {{ isRegister ? stateObj.register.name : stateObj.login.name }}
+        </v-toolbar-title>
+      </v-toolbar>
+      <v-card-text>
+        <form
+          ref="form"
+          @submit.prevent="handleSubmit"
+        >
+          <v-text-field
+            v-if="isRegister"
+            v-model="name"
+            name="name"
+            label="Naam"
+            type="text"
+            placeholder="Naam"
+            required
+          />
+
+          <v-text-field
+            v-model="email"
+            name="email"
+            label="E-mail"
+            type="email"
+            placeholder="user@example.com"
+            required
+          />
+
+          <v-text-field
+            v-model="password"
+            name="password"
+            label="Wachtwoord"
+            type="password"
+            placeholder="password"
+            required
+          />
+
+          <v-text-field
+            v-if="isRegister"
+            v-model="confirmPassword"
+            name="confirmPassword"
+            label="Wachtwoord bevestigen"
+            type="password"
+            placeholder="wachtwoord"
+            required
+          />
+
+          <div class="red--text">
+            {{ errorMessage }}
+          </div>
+
+          <v-btn
+            type="submit"
+            class="mt-4"
+            color="primary"
+          >
+            {{ isRegister ? stateObj.register.name : stateObj.login.name }}
+          </v-btn>
+
+          <div
+            class="grey--text mt-4"
+            style="cursor: pointer;"
+            @click="toggleForm"
+          >
+            {{ toggleMessage }}
+          </div>
+        </form>
+      </v-card-text>
+    </v-card>
+  </v-container>
+</template>
+

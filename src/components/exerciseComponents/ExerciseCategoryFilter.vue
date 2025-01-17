@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import {ref, computed, watch} from "vue";
 import ExerciseFiltering from "@/components/exerciseComponents/ExerciseFiltering.vue";
-import { useRoute, useRouter } from "vue-router";
-import { exerciseDao } from "@/api/dao/exercise_dao";
+import {useRoute, useRouter} from "vue-router";
+import {exerciseDao} from "@/api/dao/exercise_dao";
+import ToolbarWithBackButton from "@/components/ToolbarWithBackButton.vue";
 
 // Router instances
 const route = useRoute();
@@ -22,14 +23,14 @@ const props = defineProps<{
 
 // Category options
 const categorieOptions = [
-  { label: "Alle Categorieën", value: "alle" },
-  { label: "Warming Up", value: "warming-up" },
-  { label: "Techniek", value: "techniek" },
-  { label: "Tactiek", value: "tactiek" },
-  { label: "Conditie", value: "conditie" },
-  { label: "Cooling Down", value: "cooling-down" },
-  { label: "Keeper", value: "keeper" },
-  { label: "Theorie", value: "theorie" },
+  {label: "Alle Categorieën", value: "alle"},
+  {label: "Warming Up", value: "warming-up"},
+  {label: "Techniek", value: "techniek"},
+  {label: "Tactiek", value: "tactiek"},
+  {label: "Conditie", value: "conditie"},
+  {label: "Cooling Down", value: "cooling-down"},
+  {label: "Keeper", value: "keeper"},
+  {label: "Theorie", value: "theorie"},
 ];
 
 // Filter exercises based on category
@@ -60,7 +61,7 @@ watch(
 
 // Navigate to a new category
 const navigateToCategory = (categorie: string) => {
-  router.push({ path: "/oefeningen", query: { categorie } });
+  router.push({path: "/oefeningen", query: {categorie}});
 };
 </script>
 
@@ -75,30 +76,20 @@ const navigateToCategory = (categorie: string) => {
           @click="navigateToCategory(option.value)"
         >
           <v-card-title class="text-center text-h6 text-wrap">{{
-            setLabel(option.value)
-          }}</v-card-title>
+              setLabel(option.value)
+            }}
+          </v-card-title>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
 
   <div v-else>
-    <!-- Filtered Exercises -->
-    <v-container>
-      <v-card>
-        <v-card-title class="text-center text-wrap"
-          >Selectie: {{ setLabel(filters.categorie) }}</v-card-title
-        >
-
-        <v-card-actions class="d-flex justify-center">
-          <v-btn @click="router.push('/oefeningen')"
-            >Andere categorie kiezen</v-btn
-          >
-        </v-card-actions>
-      </v-card>
-    </v-container>
-    <ExerciseFiltering :exercises="filteredExercises" />
+<!--    <ToolbarWithBackButton title="Selectie: {{ setLabel(filters.categorie) }}" />-->
+    <ToolbarWithBackButton>Selectie: {{ setLabel(filters.categorie) }}</ToolbarWithBackButton>
+    <ExerciseFiltering :exercises="filteredExercises"/>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>

@@ -7,19 +7,18 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AddButton: typeof import('./src/components/small/AddButton.vue')['default']
     Exercise: typeof import('./src/components/exerciseComponents/Exercise.vue')['default']
     ExerciseCategoryFilter: typeof import('./src/components/exerciseComponents/ExerciseCategoryFilter.vue')['default']
     ExerciseDetail: typeof import('./src/components/exerciseComponents/ExerciseDetail.vue')['default']
     ExerciseFiltering: typeof import('./src/components/exerciseComponents/ExerciseFiltering.vue')['default']
     ExerciseList: typeof import('./src/components/exerciseComponents/ExerciseList.vue')['default']
     ExerciseVisual: typeof import('./src/components/exerciseComponents/ExerciseVisual.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    PageContent: typeof import('./src/components/PageContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ToolbarWithBackButton: typeof import('./src/components/ToolbarWithBackButton.vue')['default']
     Training: typeof import('./src/components/trainingComponents/Training.vue')['default']
     TrainingDetail: typeof import('./src/components/trainingComponents/TrainingDetail.vue')['default']
     TrainingList: typeof import('./src/components/trainingComponents/TrainingList.vue')['default']
-    Welkom: typeof import('./src/components/Welkom.vue')['default']
   }
 }
