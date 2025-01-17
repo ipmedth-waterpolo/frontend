@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { exerciseDao } from "@/api/dao/exercise_dao";
+import type {exerciseDao} from "@/api/dao/exercise_dao";
 import Exercise from "@/components/exerciseComponents/Exercise.vue";
-import { ref, watch } from "vue";
+import {ref, watch} from "vue";
 import AddButton from "@/components/small/AddButton.vue";
 
 const selectedExerciseIDs = ref<number[]>(
@@ -38,14 +38,14 @@ watch(
   (newVal) => {
     localStorage.setItem("selectedExerciseIDs", JSON.stringify(newVal));
   },
-  { deep: true }
+  {deep: true}
 );
 
 </script>
 
 <template>
   <v-container max-width="900">
-    <v-row>
+    <v-row class="pb-16">
       <v-col
         v-for="exercise in exercises"
         :key="exercise.id"
@@ -57,7 +57,7 @@ watch(
         <v-row class="align-center">
           <!-- Exercise Component -->
           <v-col :cols="showAddButton ? 10 : 12">
-            <Exercise :exercise />
+            <Exercise :exercise/>
           </v-col>
 
           <!-- Conditionally Render Add Button -->
@@ -70,9 +70,12 @@ watch(
             </v-col>
           </template>
         </v-row>
+
       </v-col>
-      <v-col v-if="exercises.length === 0">
-        Geen oefeningen gevonden
+      <v-col cols="12">
+        <v-card v-if="exercises.length === 0">
+          <v-card-title class="text-center">Geen oefeningen gevonden</v-card-title>
+        </v-card>
       </v-col>
     </v-row>
 
@@ -83,14 +86,15 @@ watch(
         bg-color="primary"
         variant="tonal"
         single-line
+        density="compact"
       >
         <v-banner-text class="text-h6 font-weight-bold">
-          <v-icon icon="mdi-basket-outline" />
+          <v-icon icon="mdi-basket-outline"/>
           {{ selectedExerciseIDs.length }}
         </v-banner-text>
         <v-btn color="white" base-color="white" variant="text" @click="$router.push('/oefeningen/training-maken')">
           Naar selectie
-          <v-icon icon="mdi-arrow-right" />
+          <v-icon icon="mdi-arrow-right"/>
         </v-btn>
       </v-banner>
     </template>
