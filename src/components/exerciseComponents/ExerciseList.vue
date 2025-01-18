@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import type {exerciseDao} from "@/api/dao/exercise_dao";
 import Exercise from "@/components/exerciseComponents/Exercise.vue";
-import {ref, watch} from "vue";
+import {useSelectedExercises} from "@/components/exerciseComponents/useSelectedExercises";
 import AddButton from "@/components/small/AddButton.vue";
-
-const selectedExerciseIDs = ref<number[]>(
-  JSON.parse(localStorage.getItem("selectedExerciseIDs") || "[]") // Load from localStorage
-);
 
 defineProps({
   exercises: {
@@ -19,27 +15,10 @@ defineProps({
   },
 });
 
-// Adds or removes exercise ID
-const toggleExerciseSelection = (id: number) => {
-  const index = selectedExerciseIDs.value.indexOf(id);
-  if (index > -1) {
-    selectedExerciseIDs.value.splice(index, 1);
-  } else {
-    selectedExerciseIDs.value.push(id);
-  }
-};
+const {selectedExerciseIDs, toggleExerciseSelection} = useSelectedExercises();
 
 // Check if an exercise is selected
 const isExerciseSelected = (id: number) => selectedExerciseIDs.value.includes(id);
-
-// Save changes to localStorage
-watch(
-  selectedExerciseIDs,
-  (newVal) => {
-    localStorage.setItem("selectedExerciseIDs", JSON.stringify(newVal));
-  },
-  {deep: true}
-);
 
 </script>
 
@@ -78,25 +57,5 @@ watch(
         </v-card>
       </v-col>
     </v-row>
-
-    <!-- Conditionally Render Banner -->
-    <template v-if="showAddButton && selectedExerciseIDs.length > 0 && $route.path !== '/oefeningen/training-maken'">
-      <v-banner
-        class="justify-center position-fixed bottom-0 left-0 right-0"
-        bg-color="primary"
-        variant="tonal"
-        single-line
-        density="compact"
-      >
-        <v-banner-text class="text-h6 font-weight-bold">
-          <v-icon icon="mdi-basket-outline"/>
-          {{ selectedExerciseIDs.length }}
-        </v-banner-text>
-        <v-btn color="white" base-color="white" variant="text" @click="$router.push('/oefeningen/training-maken')">
-          Verder
-          <v-icon icon="mdi-arrow-right"/>
-        </v-btn>
-      </v-banner>
-    </template>
   </v-container>
 </template>
