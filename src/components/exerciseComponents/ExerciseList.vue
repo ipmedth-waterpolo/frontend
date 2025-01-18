@@ -80,7 +80,7 @@ watch(
     </v-row>
 
     <!-- Conditionally Render Banner -->
-    <template v-if="showAddButton">
+    <template v-if="showAddButton && selectedExerciseIDs.length > 0 && $route.path !== '/oefeningen/training-maken'">
       <v-banner
         class="justify-center position-fixed bottom-0 left-0 right-0"
         bg-color="primary"
@@ -93,7 +93,7 @@ watch(
           {{ selectedExerciseIDs.length }}
         </v-banner-text>
         <v-btn color="white" base-color="white" variant="text" @click="$router.push('/oefeningen/training-maken')">
-          Naar selectie
+          Verder
           <v-icon icon="mdi-arrow-right"/>
         </v-btn>
       </v-banner>

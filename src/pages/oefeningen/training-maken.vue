@@ -4,7 +4,7 @@ import {useExercises} from "@/api/composable/useExercises";
 import {useTrainings} from "@/api/composable/useTrainings";
 import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
 import router from "@/router";
-import ToolbarWithBackButton from "@/components/ToolbarWithBackButton.vue";
+import ToolbarWithBackButton from "@/components/small/ToolbarWithBackButton.vue";
 
 export default defineComponent({
   name: "TrainingMaken",

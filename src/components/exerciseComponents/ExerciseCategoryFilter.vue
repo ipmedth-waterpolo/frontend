@@ -3,7 +3,7 @@ import {ref, computed, watch} from "vue";
 import ExerciseFiltering from "@/components/exerciseComponents/ExerciseFiltering.vue";
 import {useRoute, useRouter} from "vue-router";
 import {exerciseDao} from "@/api/dao/exercise_dao";
-import ToolbarWithBackButton from "@/components/ToolbarWithBackButton.vue";
+import ToolbarWithBackButton from "@/components/small/ToolbarWithBackButton.vue";
 
 // Router instances
 const route = useRoute();

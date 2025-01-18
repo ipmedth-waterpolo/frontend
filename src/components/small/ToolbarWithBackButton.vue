@@ -1,10 +1,17 @@
 <script setup lang="ts">
 
+defineProps({
+  showBackButton: {
+    type: Boolean,
+    default: true
+  }
+})
+
 </script>
 
 <template>
   <v-toolbar density="compact">
-    <v-btn
+    <v-btn v-if="showBackButton"
       @click="$router.go(-1)"
     >
       <v-icon size="x-large" icon="mdi-arrow-left"/>
