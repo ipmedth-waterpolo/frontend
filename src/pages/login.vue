@@ -82,8 +82,7 @@ export default defineComponent({
           password: this.password,
           password_confirmation: this.confirmPassword,
         };
-        const response = await axiosInstance.post("/register", data);
-        // console.log(response.data);
+        await axiosInstance.post("/register", data);
 
         this.isRegister = false; // Switch to login view
         this.errorMessage = ""; // Clear error message
