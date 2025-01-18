@@ -2,6 +2,7 @@
 import {defineComponent, ref, computed, onMounted, watch} from "vue";
 import {useExercises} from "@/api/composable/useExercises";
 import {useTrainings} from "@/api/composable/useTrainings";
+import {useSelectedExercises} from "@/components/exerciseComponents/useSelectedExercises";
 import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
 import router from "@/router";
 import ToolbarWithBackButton from "@/components/small/ToolbarWithBackButton.vue";
@@ -15,11 +16,9 @@ export default defineComponent({
   setup() {
     const {exercises, error: exerciseError, fetchExercises} = useExercises();
     const {createTraining, error: trainingError} = useTrainings();
+    const {selectedExerciseIDs, removeAllExercises} = useSelectedExercises();
 
     const formRef = ref();
-    const selectedExerciseIDs = ref<number[]>(
-      JSON.parse(localStorage.getItem("selectedExerciseIDs") || "[]")
-    );
 
     const trainingData = ref({
       name: "",
@@ -83,7 +82,7 @@ export default defineComponent({
       try {
         await createTraining(newTraining);
         isSuccess.value = true;
-        localStorage.setItem("selectedExerciseIDs", JSON.stringify([]));
+        removeAllExercises();
         await router.push("/mijn-trainingen");
         await new Promise(r => setTimeout(r, 100));
         router.go(0);
@@ -124,20 +123,20 @@ export default defineComponent({
         <v-form ref="formRef" @submit.prevent="tryToAddTraining">
           <v-text-field
             v-model="trainingData.name"
-            label="Naam van de Training"
+            label="Naam van de Training*"
             placeholder="Nieuwe training"
             required
           />
 
           <v-textarea
             v-model="trainingData.beschrijving"
-            label="Beschrijving"
+            label="Beschrijving*"
             required
           />
 
           <v-text-field
             v-model="trainingData.totale_duur"
-            label="Totale Duur (minuten)"
+            label="Totale Duur (minuten)*"
             type="number"
             required
           />
@@ -155,12 +154,11 @@ export default defineComponent({
     </v-card>
     <v-card class="mt-2">
       <v-card-title>
-        {{ selectedExercises.length }} Geselecteerde oefeningen:
+        {{ selectedExercises.length }} Geselecteerde oefening{{ selectedExercises.length === 1 ? "" : "en" }}:
       </v-card-title>
     </v-card>
 
     <ExerciseList
-      v-if="exercises && exercises.length > 0"
       :exercises="selectedExercises"
       :show-add-button="true"
     />

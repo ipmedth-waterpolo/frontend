@@ -14,7 +14,13 @@ const toggleExerciseSelection = (id: number) => {
   localStorage.setItem('selectedExerciseIDs', JSON.stringify(selectedExerciseIDs.value));
 };
 
+const removeAllExercises = () => {
+  selectedExerciseIDs.value = [];
+  localStorage.removeItem('selectedExerciseIDs');
+}
+
 export const useSelectedExercises = () => ({
   selectedExerciseIDs,
   toggleExerciseSelection,
+  removeAllExercises
 });
