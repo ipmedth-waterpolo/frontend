@@ -1,5 +1,6 @@
 import {trainingDao} from "@/api/dao/training_dao";
 import {inject, ref} from "vue";
+import axios from "axios";
 
 export function useTrainings() {
   const apiServiceTrainings = inject("apiServiceTrainings") as {
@@ -7,6 +8,7 @@ export function useTrainings() {
     getTrainingById: (id: string) => Promise<trainingDao>;
     createTraining: (newTraining: Record<string, any>) => Promise<trainingDao>;
     updateTraining: (id: string, updatedTraining: Record<string, any>) => Promise<trainingDao>;
+    deleteTraining: (id: string) => Promise<void>;
   };
 
   const trainings = ref<trainingDao[]>([]);

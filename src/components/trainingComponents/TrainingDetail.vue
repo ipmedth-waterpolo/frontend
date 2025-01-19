@@ -25,13 +25,13 @@ const removeTraining = async () => {
 
 const editPopup = ref(false);
 
-const rating = ref<number | null>(null);
+const rating = ref<number>(0);
 const getStarClass = (index: number, trainingRating: number) => {
   return index < trainingRating ? "fas fa-star" : "far fa-star";
 };
 
 const submitRating = async () => {
-  if (rating.value === null) return;
+  if (rating.value === 0) return;
 
   try {
     await addRating(props.training.id, rating.value);
