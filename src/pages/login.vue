@@ -59,7 +59,6 @@ export default defineComponent({
           password: this.password,
         };
         const response = await axiosInstance.post("/login", data);
-        console.log(response.data);
         const {token} = response.data;
 
         // Save the token in localStorage

@@ -23,7 +23,7 @@ const isExerciseSelected = (id: number) => selectedExerciseIDs.value.includes(id
 </script>
 
 <template>
-  <v-container max-width="900">
+  <div style="max-width: 900px; margin-top: 12px">
     <v-row>
       <v-col
         v-for="exercise in exercises"
@@ -57,5 +57,5 @@ const isExerciseSelected = (id: number) => selectedExerciseIDs.value.includes(id
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>

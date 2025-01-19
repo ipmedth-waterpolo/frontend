@@ -6,6 +6,7 @@ export function useTrainings() {
     getTrainings: () => Promise<trainingDao[]>;
     getTrainingById: (id: string) => Promise<trainingDao>;
     createTraining: (newTraining: Record<string, any>) => Promise<trainingDao>;
+    updateTraining: (id: string, updatedTraining: Record<string, any>) => Promise<trainingDao>;
   };
 
   const trainings = ref<trainingDao[]>([]);
@@ -40,6 +41,31 @@ export function useTrainings() {
     }
   };
 
+  const editTrainingById = async (id: string, updatedTraining: Record<string, any>) => {
+    try {
+      const editedTraining = await apiServiceTrainings.updateTraining(id, updatedTraining);
+      trainings.value = trainings.value.map((training) => {
+        if (training.id === id) {
+          return editedTraining;
+        }
+        return training;
+      });
+    } catch (err) {
+      error.value = "Er is een fout opgetreden bij het bewerken van de training";
+      console.error(err);
+    }
+  }
+
+  const deleteTrainingById = async (id: string) => {
+    try {
+      await apiServiceTrainings.deleteTraining(id);
+      trainings.value = trainings.value.filter((training) => training.id !== id);
+    } catch (err) {
+      error.value = "Er is een fout opgetreden bij het verwijderen van de training";
+      console.error(err);
+    }
+  };
+
   return {
     trainings,
     training,
@@ -47,5 +73,7 @@ export function useTrainings() {
     fetchTrainings,
     fetchTrainingById,
     createTraining,
+    deleteTrainingById,
+    editTrainingById
   };
 }

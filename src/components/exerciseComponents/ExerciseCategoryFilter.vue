@@ -85,7 +85,6 @@ const navigateToCategory = (categorie: string) => {
   </v-container>
 
   <div v-else>
-<!--    <ToolbarWithBackButton title="Selectie: {{ setLabel(filters.categorie) }}" />-->
     <ToolbarWithBackButton>Selectie: {{ setLabel(filters.categorie) }}</ToolbarWithBackButton>
     <ExerciseFiltering :exercises="filteredExercises"/>
   </div>

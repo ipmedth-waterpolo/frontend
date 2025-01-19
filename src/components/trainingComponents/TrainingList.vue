@@ -78,7 +78,7 @@ const displayedTrainings = computed(() => {
     </v-row>
 
     <!-- Button to create a new training -->
-    <v-row class="d-flex justify-center">
+    <v-row class="d-flex justify-center mb-2">
       <v-btn
         @click="$router.push('/oefeningen')"
         class="mt-6 pa-6 justify-center align-content-center"

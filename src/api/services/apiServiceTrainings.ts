@@ -73,7 +73,7 @@ export const apiServiceTrainings = {
     }): Promise<trainingDao> {
         try {
             const response = await axiosInstance.post("/trainings", trainingData);
-            return mapToTrainingDao(response.data.data);
+            return response.data.data.training;
             //dit is dom dat dit niet ook data.data.training is, fix dit in back-end????
         } catch (error) {
             console.error("Error creating training:", error);
@@ -88,7 +88,7 @@ export const apiServiceTrainings = {
     ): Promise<trainingDao> {
         try {
             const response = await axiosInstance.put(`/training/${id}`, trainingData);
-            return mapToTrainingDao(response.data.data.training);
+            return response.data.data;
         } catch (error) {
             console.error("Error updating training:", error);
             throw error;

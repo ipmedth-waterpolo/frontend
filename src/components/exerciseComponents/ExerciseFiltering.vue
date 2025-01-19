@@ -54,10 +54,7 @@ const filteredExercises = computed(() => {
 
 <template>
   <v-container>
-    <!--    <v-row>-->
-    <!-- Filters Section -->
 
-    <!--      <v-col cols="12">-->
     <v-expansion-panels>
       <v-expansion-panel title="Filters">
         <v-expansion-panel-text>
@@ -90,7 +87,6 @@ const filteredExercises = computed(() => {
               thumb-label="always"
             ></v-range-slider>
 
-            <!-- Minimum Aantal Spelers Filter -->
             <v-range-slider
               v-model="filters.minimumAantalSpelers"
               :max="20"
@@ -102,11 +98,9 @@ const filteredExercises = computed(() => {
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
-    <!--      </v-col>-->
-    <!--    </v-row>-->
-  </v-container>
 
   <ExerciseList :exercises="filteredExercises" :showAddButton="true"/>
+  </v-container>
 </template>
 
 <style scoped></style>

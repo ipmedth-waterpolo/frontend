@@ -9,21 +9,31 @@ import ToolbarWithBackButton from "@/components/small/ToolbarWithBackButton.vue"
 
 export default defineComponent({
   name: "TrainingMaken",
+  props: {
+    isEditing: {
+      type: Boolean,
+      default: false
+    },
+    trainingToEdit: {
+      type: Object,
+      default: null
+    }
+  },
   components: {
     ToolbarWithBackButton,
-    ExerciseList,
+    ExerciseList
   },
-  setup() {
+  setup(props) {
     const {exercises, error: exerciseError, fetchExercises} = useExercises();
-    const {createTraining, error: trainingError} = useTrainings();
+    const {createTraining, editTrainingById, error: trainingError} = useTrainings();
     const {selectedExerciseIDs, removeAllExercises} = useSelectedExercises();
 
     const formRef = ref();
 
     const trainingData = ref({
-      name: "",
-      beschrijving: "",
-      totale_duur: "",
+      name: props.trainingToEdit ? props.trainingToEdit.name : "",
+      beschrijving: props.trainingToEdit ? props.trainingToEdit.beschrijving : "",
+      totale_duur: props.trainingToEdit ? props.trainingToEdit.totale_duur : "",
     });
 
     const isSuccess = ref(false);
@@ -56,6 +66,33 @@ export default defineComponent({
     watch(totalDuration, (newValue) => {
       trainingData.value.totale_duur = newValue.toString();
     });
+
+    const submitForm = () => {
+      if (props.isEditing) {
+        tryToEditTraining();
+      } else {
+        tryToAddTraining();
+      }
+    }
+
+    const tryToEditTraining = async () => {
+      const editedTraining = {
+        name: trainingData.value.name,
+        beschrijving: trainingData.value.beschrijving,
+        totale_duur: trainingData.value.totale_duur,
+        // oefeningen: selectedExerciseIDs.value.join(","),
+      };
+      try {
+        await editTrainingById(props.trainingToEdit.id, editedTraining);
+        isSuccess.value = true;
+        await router.push("/mijn-trainingen");
+        // await new Promise(r => setTimeout(r, 100));
+        // router.go(0);
+      } catch (err) {
+        console.error("Failed to create training:", err);
+        errorMessage.value = "Er is iets misgegaan bij het opslaan van de training.";
+      }
+    };
 
     const tryToAddTraining = async () => {
       selectedExerciseIDs.value = JSON.parse(localStorage.getItem("selectedExerciseIDs") || "[]");
@@ -104,23 +141,23 @@ export default defineComponent({
       selectedExerciseIDs,
       tryToAddTraining,
       errorMessage,
+      submitForm
     };
   },
 });
 </script>
 
 <template>
-  <ToolbarWithBackButton>Nieuwe Training</ToolbarWithBackButton>
+  <ToolbarWithBackButton v-if="!isEditing">Nieuwe Training</ToolbarWithBackButton>
   <v-container
     fluid
     fill-height
     class="align-content-center"
-    height="100%"
     max-width="900"
   >
     <v-card>
       <v-card-text>
-        <v-form ref="formRef" @submit.prevent="tryToAddTraining">
+        <v-form ref="formRef" @submit.prevent="submitForm">
           <v-text-field
             v-model="trainingData.name"
             label="Naam van de Training*"
@@ -152,16 +189,18 @@ export default defineComponent({
         </v-form>
       </v-card-text>
     </v-card>
-    <v-card class="mt-2">
-      <v-card-title>
-        {{ selectedExercises.length }} Geselecteerde oefening{{ selectedExercises.length === 1 ? "" : "en" }}:
-      </v-card-title>
-    </v-card>
+    <div v-if="!isEditing">
+      <v-card class="mt-2">
+        <v-card-title>
+          {{ selectedExercises.length }} Geselecteerde oefening{{ selectedExercises.length === 1 ? "" : "en" }}:
+        </v-card-title>
+      </v-card>
 
-    <ExerciseList
-      :exercises="selectedExercises"
-      :show-add-button="true"
-    />
+      <ExerciseList
+        :exercises="selectedExercises"
+        :show-add-button="true"
+      />
+    </div>
 
     <v-alert v-if="exerciseError" type="error">
       Fout bij het laden van oefeningen: {{ exerciseError }}
