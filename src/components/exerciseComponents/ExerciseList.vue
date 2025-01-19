@@ -24,7 +24,7 @@ const isExerciseSelected = (id: number) => selectedExerciseIDs.value.includes(id
 
 <template>
   <v-container max-width="900">
-    <v-row class="pb-16">
+    <v-row>
       <v-col
         v-for="exercise in exercises"
         :key="exercise.id"
@@ -51,8 +51,8 @@ const isExerciseSelected = (id: number) => selectedExerciseIDs.value.includes(id
         </v-row>
 
       </v-col>
-      <v-col cols="12">
-        <v-card v-if="exercises.length === 0">
+      <v-col cols="12" v-if="exercises.length === 0">
+        <v-card>
           <v-card-title class="text-center">Geen oefeningen gevonden</v-card-title>
         </v-card>
       </v-col>

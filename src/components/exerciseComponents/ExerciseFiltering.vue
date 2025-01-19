@@ -37,9 +37,9 @@ const leeftijdsgroepOptions = [
 const filteredExercises = computed(() => {
   return props.exercises.filter((exercise) => {
     return (
-      filters.value.leeftijdsgroep.length === 0 ||
+      (filters.value.leeftijdsgroep.length === 0 ||
       filters.value.leeftijdsgroep.some((filter) =>
-        exercise.leeftijdsgroep.includes(filter))
+        exercise.leeftijdsgroep.includes(filter)))
       &&
       exercise.duur >= filters.value.duur[0] &&
       exercise.duur <= filters.value.duur[1] &&

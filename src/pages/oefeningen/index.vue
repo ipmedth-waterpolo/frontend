@@ -26,7 +26,6 @@ const clickRemove = () => {
   <!--  conditional banner-->
   <div
     v-if="selectedExerciseIDs.length > 0"
-    class="mt-16"
   >
     <v-bottom-navigation
       bg-color="primary"
