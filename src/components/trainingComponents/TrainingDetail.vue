@@ -13,31 +13,46 @@ const props = defineProps({
   },
 });
 
-const {deleteTrainingById, editTrainingById} = useTrainings();
+const {deleteTrainingById, addRating} = useTrainings();
 
 const trashPopup = ref(false);
 const removeTraining = async () => {
   await deleteTrainingById(props.training.id);
   trashPopup.value = false;
-  await new Promise(r => setTimeout(r, 100));
+  await new Promise((r) => setTimeout(r, 100));
   await router.go(-1);
-}
+};
 
 const editPopup = ref(false);
-const editTraining = () => {
-  //
-}
 
-const getStarClass = (index: number, rating: number) => {
-  return index < rating ? 'fas fa-star' : 'far fa-star';
+const rating = ref<number | null>(null);
+const getStarClass = (index: number, trainingRating: number) => {
+  return index < trainingRating ? "fas fa-star" : "far fa-star";
+};
+
+const submitRating = async () => {
+  if (rating.value === null) return;
+
+  try {
+    await addRating(props.training.id, rating.value);
+    console.log(`Rating of ${rating.value} submitted successfully.`);
+  } catch (error) {
+    console.error("Failed to submit rating:", error);
+  }
 };
 
 const userHasAccess = () => {
-  return (localStorage.getItem('userID') === props.training.userID) ||
-    (localStorage.getItem('userRole') === 'admin');
+  return (
+    localStorage.getItem("userID") === props.training.userID ||
+    localStorage.getItem("userRole") === "admin"
+  );
 };
 
+const canRate = () => {
+  return localStorage.getItem("userID") !== props.training.userID;
+};
 </script>
+
 
 <template>
   <ToolbarWithBackButton>{{ training.name }}</ToolbarWithBackButton>
@@ -95,6 +110,23 @@ const userHasAccess = () => {
         </v-btn>
       </v-col>
     </v-row>
+    <v-row
+      v-if="canRate"
+      class="d-flex justify-center align-center mt-8 mb-4"
+    >
+      <v-card>
+        <v-card-text>Beoordeling geven</v-card-text>
+        <v-rating
+          v-model="rating"
+          :length="5"
+          color="yellow darken-3"
+          background-color="grey darken-1"
+          empty-icon="mdi-star-outline"
+          hover
+          @change="submitRating"
+        ></v-rating>
+      </v-card>
+    </v-row>
 
     <v-dialog
       v-model="trashPopup"
@@ -122,12 +154,9 @@ const userHasAccess = () => {
     </v-dialog>
     <v-dialog
       v-model="editPopup"
-
     >
       <training-maken :isEditing="true" :trainingToEdit="training"></training-maken>
-
     </v-dialog>
-
   </v-container>
 </template>
 

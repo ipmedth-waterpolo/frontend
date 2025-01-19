@@ -66,6 +66,18 @@ export function useTrainings() {
     }
   };
 
+  const addRating = async (trainingID: number, ratingNumber: number) => {
+    try {
+      const response = await axios.post(`/training/${trainingID}/rating`, {
+        ratingNumber,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error adding rating:", error);
+      throw error;
+    }
+  };
+
   return {
     trainings,
     training,
@@ -74,6 +86,7 @@ export function useTrainings() {
     fetchTrainingById,
     createTraining,
     deleteTrainingById,
-    editTrainingById
+    editTrainingById,
+    addRating,
   };
 }
