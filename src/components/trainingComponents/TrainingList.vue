@@ -17,7 +17,7 @@ const displayedTrainings = computed(() => {
     case "oudste":
       return props.trainings; // oldest
     case "sterren":
-      return [...props.trainings].sort((a, b) => b.ratings - a.ratings); // ratings
+      return [...props.trainings].sort((a, b) => (b.ratings ?? 0) - (a.ratings ?? 0)); // ratings
     case "duur":
       return [...props.trainings].sort((a, b) => b.totale_duur - a.totale_duur); // duration
     case "alfabetisch":
