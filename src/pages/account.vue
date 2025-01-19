@@ -2,6 +2,7 @@
 
 function logout() {
   localStorage.removeItem('authToken');
+  localStorage.clear();
   window.location.href = '/';
 }
 

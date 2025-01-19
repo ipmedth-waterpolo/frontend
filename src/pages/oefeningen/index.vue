@@ -8,6 +8,13 @@ const {exercises, error, fetchExercises} = useExercises();
 const {selectedExerciseIDs, toggleExerciseSelection, removeAllExercises} = useSelectedExercises();
 const trashPopup = ref(false);
 
+const userRole = localStorage.getItem("userRole");
+const userHasAccess = () => {
+  return (
+    userRole === "admin" || userRole === "trainer"
+  );
+}
+
 onMounted(() => {
   fetchExercises();
 });
@@ -25,7 +32,7 @@ const clickRemove = () => {
 
   <!--  conditional banner-->
   <div
-    v-if="selectedExerciseIDs.length > 0"
+    v-if="selectedExerciseIDs.length > 0 && userHasAccess()"
   >
     <v-bottom-navigation
       bg-color="primary"

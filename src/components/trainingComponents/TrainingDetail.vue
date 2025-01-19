@@ -111,7 +111,7 @@ const canRate = () => {
       </v-col>
     </v-row>
     <v-row
-      v-if="canRate"
+      v-if="!userHasAccess() && canRate()"
       class="d-flex justify-center align-center mt-8 mb-4"
     >
       <v-card>
