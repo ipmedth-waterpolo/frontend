@@ -11,13 +11,15 @@
 </template>
 
 <script setup lang="ts">
+import type {PropType} from "vue";
+
 defineProps({
   isSelected: {
     type: Boolean,
     required: true,
   },
   onToggle: {
-    type: Function,
+    type: Function as PropType<() => void>,
     required: true,
   },
 });

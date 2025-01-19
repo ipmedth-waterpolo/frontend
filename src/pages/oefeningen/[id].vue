@@ -9,6 +9,8 @@ const { exercise, error, fetchExerciseById, deleteExerciseById } =
 const route = useRoute();
 const router = useRouter();
 
+const userRole = localStorage.getItem("userRole");
+
 onMounted(() => {
   const exerciseId = route.params.id as string;
   fetchExerciseById(exerciseId);
@@ -18,7 +20,7 @@ onMounted(() => {
 <template>
   <div v-if="exercise">
     <ExerciseDetail :exercise="exercise" />
-    <button @click="deleteExerciseById(exercise.id).then(() => router.back())">
+    <button v-if="userRole === 'admin'" @click="deleteExerciseById(exercise.id).then(() => router.back())">
       Verwijder oefening
     </button>
   </div>

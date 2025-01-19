@@ -5,14 +5,12 @@ import { computed, onMounted } from "vue";
 
 const { trainings, error, fetchTrainings } = useTrainings();
 
-// Retrieve the userID from localStorage
 const userID = localStorage.getItem("userID");
 
 onMounted(() => {
   fetchTrainings();
 });
 
-// Filter trainings based on userID
 const myTrainings = computed(() => {
   return trainings.value.filter((training) => training.userID === userID);
 });
