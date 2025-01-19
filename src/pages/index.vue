@@ -12,8 +12,8 @@ const username = localStorage.getItem('username');
         Open de zijbalk om te navigeren, of bekijk de lijst hieronder.
       </v-card-text>
     </v-card>
-    <v-card>
-      <v-card-subtitle>Snelkoppelingen</v-card-subtitle>
+    <v-card class="mt-6">
+      <v-card-subtitle class="pt-4">Snelkoppelingen</v-card-subtitle>
       <v-card-item>
         <v-list>
           <v-list-item link :to="{ path: '/mijn-trainingen' }">Mijn trainingen</v-list-item>
