@@ -18,13 +18,12 @@ const currentAppBarTitle = computed(() => {
   const matchingItem = sortedItems.find((item) => route.path.startsWith(item.to));
   return matchingItem?.appBarTitle || "Waterpolo Planner";
 });
-
 </script>
 
 <template>
   <v-navigation-drawer v-model="drawer">
     <v-list>
-      <v-list-item v-for="(item, i) in props.items" :key="i" :to="item.to">
+      <v-list-item v-for="item in props.items" :key="item.to" :to="item.to">
         {{ item.title }}
       </v-list-item>
     </v-list>

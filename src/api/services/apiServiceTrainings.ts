@@ -72,7 +72,7 @@ export const apiServiceTrainings = {
         ratings?: number | null;
     }): Promise<trainingDao> {
         try {
-            const response = await axiosInstance.post("/trainings", trainingData);
+            const response = await axiosInstance.post("/training", trainingData);
             return response.data.data.training;
             //dit is dom dat dit niet ook data.data.training is, fix dit in back-end????
         } catch (error) {

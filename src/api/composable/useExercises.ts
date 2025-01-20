@@ -1,6 +1,5 @@
 import { exerciseDao } from "@/api/dao/exercise_dao";
 import { inject, ref } from "vue";
-// import { userService } from "../services/userService";
 
 export function useExercises() {
   const apiServiceExercises = inject("apiServiceExercises") as {
@@ -36,7 +35,6 @@ export function useExercises() {
 
   const deleteExerciseById = async (id: string) => {
     try {
-      // localStorage.getItem("role");
       await apiServiceExercises.deleteExercise(id);
       exercises.value = exercises.value.filter(
         (exercise) => exercise.id !== id
