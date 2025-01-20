@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useUserData from "@/useRoles";
+import useUserData from "@/useUserData";
 import {onMounted } from "vue";
 
 const { userData, callAndSetUserData } = useUserData();

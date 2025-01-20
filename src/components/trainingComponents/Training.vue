@@ -14,7 +14,7 @@ const getStarClass = (index: number, rating: number) => {
 <template>
   <v-card @click="$router.push({ path: `/trainingen/${training.id}` })">
     <!-- Training Name -->
-    <v-card-title>{{ training.name }}</v-card-title>
+    <v-card-title class="text-wrap">{{ training.name }}</v-card-title>
 
     <!-- Description -->
     <v-card-text>

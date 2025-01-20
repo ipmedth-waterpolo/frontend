@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import axios from "axios";
-import useUserData from "@/useRoles";
+import useUserData from "@/useUserData";
 
 const { callAndSetUserData } = useUserData();
 

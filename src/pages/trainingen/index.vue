@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import TrainingList from "@/components/trainingComponents/TrainingList.vue";
-import { useTrainings } from "@/api/composable/useTrainings";
-import useUserData from "@/useRoles";
-import { computed, onMounted } from "vue";
+import {useTrainings} from "@/api/composable/useTrainings";
+import useUserData from "@/useUserData";
+import {computed, onMounted} from "vue";
 
 const {userData} = useUserData();
-const { trainings, error, fetchTrainings } = useTrainings();
+const {trainings, error, fetchTrainings} = useTrainings();
 
-const userID = userData.value.userID;
+const userID = userData.value.userID.toString();
 
 onMounted(() => {
   fetchTrainings();
 });
 
-// Filter trainings based on userID
 const myTrainings = computed(() => {
   return trainings.value.filter((training) => training.userID !== userID);
 });
@@ -21,7 +20,7 @@ const myTrainings = computed(() => {
 
 
 <template>
-    <TrainingList :trainings="myTrainings"/>
+  <TrainingList :trainings="myTrainings"/>
 
 </template>
 
