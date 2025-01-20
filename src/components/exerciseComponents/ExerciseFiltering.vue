@@ -5,6 +5,7 @@ import type { exerciseDao } from "@/api/dao/exercise_dao";
 
 const props = defineProps<{
   exercises: exerciseDao[];
+  showAddButton: boolean;
 }>();
 
 // Filter Criteria
@@ -99,7 +100,7 @@ const filteredExercises = computed(() => {
       </v-expansion-panel>
     </v-expansion-panels>
 
-  <ExerciseList :exercises="filteredExercises" :showAddButton="true"/>
+  <ExerciseList :exercises="filteredExercises" :showAddButton/>
   </v-container>
 </template>
 

@@ -5,6 +5,11 @@ import {useRoute, useRouter} from "vue-router";
 import {exerciseDao} from "@/api/dao/exercise_dao";
 import ToolbarWithBackButton from "@/components/small/ToolbarWithBackButton.vue";
 
+const props = defineProps<{
+  exercises: exerciseDao[];
+  showAddButton: boolean;
+}>();
+
 // Router instances
 const route = useRoute();
 const router = useRouter();
@@ -15,11 +20,6 @@ const filters = ref({
     ? route.query.categorie[0] || ""
     : route.query.categorie || "",
 });
-
-// Props for exercises
-const props = defineProps<{
-  exercises: exerciseDao[];
-}>();
 
 // Category options
 const categorieOptions = [
@@ -61,7 +61,11 @@ watch(
 
 // Navigate to a new category
 const navigateToCategory = (categorie: string) => {
-  router.push({path: "/oefeningen", query: {categorie}});
+  if (props.showAddButton) {
+    router.push({path: "/training-maken", query: {categorie}});
+  } else {
+    router.push({path: "/oefeningen", query: {categorie}});
+  }
 };
 </script>
 
@@ -86,7 +90,7 @@ const navigateToCategory = (categorie: string) => {
 
   <div v-else>
     <ToolbarWithBackButton>Selectie: {{ setLabel(filters.categorie) }}</ToolbarWithBackButton>
-    <ExerciseFiltering :exercises="filteredExercises"/>
+    <ExerciseFiltering :exercises="filteredExercises" :showAddButton/>
   </div>
 </template>
 

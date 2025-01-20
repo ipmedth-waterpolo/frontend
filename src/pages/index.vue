@@ -26,8 +26,9 @@ onMounted(() => {
       <v-card-item>
         <v-list>
           <v-list-item link :to="{ path: '/mijn-trainingen' }">Mijn trainingen</v-list-item>
-          <v-list-item link :to="{ path: '/oefeningen'}">Training maken (oefeningen overzicht)</v-list-item>
-          <v-list-item link :to="{ path: '/alle-trainingen' }">Alle trainingen</v-list-item>
+          <v-list-item link :to="{ path: '/training-maken'}">Training maken</v-list-item>
+          <v-list-item link :to="{ path: '/oefeningen' }">Oefening overzicht</v-list-item>
+          <v-list-item link :to="{ path: '/trainingen' }">Alle trainingen</v-list-item>
           <div class="my-8"></div>
           <v-list-item link :to="{ path: '/account' }">Account</v-list-item>
           <v-list-item link :to="{ path: '/about' }">Over de Waterpolo Planner</v-list-item>

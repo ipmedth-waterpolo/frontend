@@ -5,7 +5,7 @@ import {useTrainings} from "@/api/composable/useTrainings";
 import useUserData from "@/useRoles";
 import {ref} from "vue";
 import router from "@/router";
-import TrainingMaken from "@/pages/oefeningen/training-maken.vue";
+import TrainingMaken from "@/pages/training-maken/aanmaken.vue";
 
 const props = defineProps({
   training: {

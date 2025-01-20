@@ -21,12 +21,13 @@ declare module 'vue-router/auto-routes' {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/about': RouteRecordInfo<'/about', '/about', Record<never, never>, Record<never, never>>,
     '/account': RouteRecordInfo<'/account', '/account', Record<never, never>, Record<never, never>>,
-    '/alle-trainingen/': RouteRecordInfo<'/alle-trainingen/', '/alle-trainingen', Record<never, never>, Record<never, never>>,
-    '/alle-trainingen/[id]': RouteRecordInfo<'/alle-trainingen/[id]', '/alle-trainingen/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/mijn-trainingen/': RouteRecordInfo<'/mijn-trainingen/', '/mijn-trainingen', Record<never, never>, Record<never, never>>,
     '/oefening-maken': RouteRecordInfo<'/oefening-maken', '/oefening-maken', Record<never, never>, Record<never, never>>,
     '/oefeningen/': RouteRecordInfo<'/oefeningen/', '/oefeningen', Record<never, never>, Record<never, never>>,
     '/oefeningen/[id]': RouteRecordInfo<'/oefeningen/[id]', '/oefeningen/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
-    '/oefeningen/training-maken': RouteRecordInfo<'/oefeningen/training-maken', '/oefeningen/training-maken', Record<never, never>, Record<never, never>>,
+    '/training-maken/': RouteRecordInfo<'/training-maken/', '/training-maken', Record<never, never>, Record<never, never>>,
+    '/training-maken/aanmaken': RouteRecordInfo<'/training-maken/aanmaken', '/training-maken/aanmaken', Record<never, never>, Record<never, never>>,
+    '/trainingen/': RouteRecordInfo<'/trainingen/', '/trainingen', Record<never, never>, Record<never, never>>,
+    '/trainingen/[id]': RouteRecordInfo<'/trainingen/[id]', '/trainingen/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
   }
 }

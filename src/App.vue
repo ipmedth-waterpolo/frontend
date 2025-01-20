@@ -33,11 +33,12 @@ const showAllRoutes = computed(() => {
 const allRouteItems = [
   {title: 'Home', to: '/', appBarTitle: 'Waterpolo Planner'},
   {title: 'Mijn Trainingen', to: '/mijn-trainingen', appBarTitle: 'Mijn Trainingen'},
-  {title: 'Training maken', to: '/oefeningen', appBarTitle: 'Training maken'},
-  {title: 'Andere Trainingen', to: '/alle-trainingen', appBarTitle: 'Trainingen'},
+  {title: 'Training maken', to: '/training-maken', appBarTitle: 'Training maken'},
+  {title: 'Andere Trainingen', to: '/trainingen', appBarTitle: 'Trainingen'},
+  {title: 'Oefeningen overzicht', to: '/oefeningen', appBarTitle: 'Oefeningen'},
   {title: 'Oefening maken', to: '/oefening-maken', appBarTitle: 'Oefening maken'},
-  {title: 'Account', to: '/account', appBarTitle: 'Account'},
   {title: 'Over ons', to: '/about', appBarTitle: 'Over Ons'},
+  {title: 'Account', to: '/account', appBarTitle: 'Account'},
 ];
 
 const filteredRouteItems = computed(() => {
@@ -46,7 +47,7 @@ const filteredRouteItems = computed(() => {
   } else {
 
     return allRouteItems.filter(
-      item => item.to !== '/oefening-maken' && item.to !== '/mijn-trainingen'
+      item => item.to !== '/oefening-maken' && item.to !== '/mijn-trainingen' && item.to !== '/training-maken'
     );
   }
 });

@@ -13,7 +13,7 @@ onMounted(() => {
 
 <template>
   <div v-if="error">error retrieving exercises</div>
-  <ExerciseOverview v-else :exercises :is-create-training-mode="false"/>
+  <ExerciseOverview v-else :exercises :is-create-training-mode="true"/>
 
 </template>
 

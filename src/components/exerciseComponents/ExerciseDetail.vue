@@ -39,7 +39,7 @@ defineProps({
               class="d-flex flex-column flex-md-row align-start align-md-center"
             >
               <!-- Benodigheden (if any) -->
-              <div v-if="exercise.benodigdheden.length > 0" class="d-flex align-center mr-md-5 mb-2 mb-md-0 pr-4">
+              <div v-if="exercise.benodigdheden" class="d-flex align-center mr-md-5 mb-2 mb-md-0 pr-4">
                 <v-icon class="mr-2">mdi-cogs</v-icon>
                 <span>{{ exercise.benodigdheden.join(", ") }}</span>
               </div>

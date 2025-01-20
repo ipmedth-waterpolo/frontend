@@ -12,7 +12,7 @@ const getStarClass = (index: number, rating: number) => {
 </script>
 
 <template>
-  <v-card @click="$router.push({ path: `/alle-trainingen/${training.id}` })">
+  <v-card @click="$router.push({ path: `/trainingen/${training.id}` })">
     <!-- Training Name -->
     <v-card-title>{{ training.name }}</v-card-title>
 
