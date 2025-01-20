@@ -1,6 +1,15 @@
 <script setup lang="ts">
+import useUserData from "@/useRoles";
+import {onMounted } from "vue";
 
-const username = localStorage.getItem('username');
+const { userData, callAndSetUserData } = useUserData();
+callAndSetUserData();
+let username = userData.value.username;
+
+onMounted(() => {
+  username = userData.value.username;
+});
+
 
 </script>
 

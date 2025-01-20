@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import TrainingList from "@/components/trainingComponents/TrainingList.vue";
 import { useTrainings } from "@/api/composable/useTrainings";
+import useUserData from "@/useRoles";
 import { computed, onMounted } from "vue";
 
+const {userData} = useUserData();
 const { trainings, error, fetchTrainings } = useTrainings();
 
-const userID = localStorage.getItem("userID");
+const userID = userData.value.userID;
 
 onMounted(() => {
   fetchTrainings();

@@ -1,6 +1,9 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import axios from "axios";
+import useUserData from "@/useRoles";
+
+const { callAndSetUserData } = useUserData();
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -104,11 +107,7 @@ export default defineComponent({
             return Promise.reject(error);
           }
         );
-        const response = await axiosInstance.get("/user");
-        localStorage.setItem("userID", response.data.user.id);
-        localStorage.setItem("userRole", response.data.user.role);
-        localStorage.setItem("username", response.data.user.name);
-        localStorage.setItem("userEmail", response.data.user.email);
+        await callAndSetUserData();
 
       } catch (err: any) {
         this.errorMessage = (err.response?.data?.message || "") + ", smth when wrong";

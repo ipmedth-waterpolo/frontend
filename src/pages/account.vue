@@ -1,28 +1,27 @@
 <script setup lang="ts">
 
-function logout() {
+import useUserData from "@/useRoles";
+
+const {userData, callAndSetUserData, clearUserData} = useUserData();
+callAndSetUserData();
+
+
+const logout = () => {
   localStorage.removeItem('authToken');
   localStorage.clear();
   window.location.href = '/';
 }
 
-const userData = () => {
-  const username = localStorage.getItem('username');
-  const userID = localStorage.getItem('userID');
-  const userEmail = localStorage.getItem('userEmail');
-  const userRole = localStorage.getItem('userRole');
-  return {username, userID, userEmail, userRole};
-}
 
 </script>
 
 <template>
   <v-container>
     <v-card>
-      <v-card-title>{{ userData().username }}</v-card-title>
+      <v-card-title>{{ userData.username }}</v-card-title>
       <v-card-text>
-        <p>E-mail: {{ userData().userEmail }}</p>
-        <p>Jouw rol: {{ userData().userRole }}</p>
+        <p>E-mail: {{ userData.userEmail }}</p>
+        <p>Jouw rol: {{ userData.userRole }}</p>
       </v-card-text>
     </v-card>
     <v-btn

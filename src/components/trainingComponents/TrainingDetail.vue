@@ -2,6 +2,7 @@
 import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
 import ToolbarWithBackButton from "@/components/small/ToolbarWithBackButton.vue";
 import {useTrainings} from "@/api/composable/useTrainings";
+import useUserData from "@/useRoles";
 import {ref} from "vue";
 import router from "@/router";
 import TrainingMaken from "@/pages/oefeningen/training-maken.vue";
@@ -13,6 +14,7 @@ const props = defineProps({
   },
 });
 
+const {isAdmin, userData} = useUserData();
 const {deleteTrainingById, addRating} = useTrainings();
 
 const trashPopup = ref(false);
@@ -41,16 +43,10 @@ const submitRating = async () => {
   }
 };
 
-const userHasAccess = () => {
-  return (
-    localStorage.getItem("userID") === props.training.userID ||
-    localStorage.getItem("userRole") === "admin"
-  );
+const trainingIsUsers = () => {
+  return userData.value.userID === props.training.userID;
 };
 
-const canRate = () => {
-  return localStorage.getItem("userID") !== props.training.userID;
-};
 </script>
 
 
@@ -88,7 +84,7 @@ const canRate = () => {
     <ExerciseList v-if="training.oefeningen" :exercises="training.oefeningen"/>
 
     <v-row
-      v-if="userHasAccess()"
+      v-if="trainingIsUsers() || isAdmin"
       class="d-flex justify-center align-center mb-2"
     >
       <v-col cols="auto">
@@ -111,7 +107,7 @@ const canRate = () => {
       </v-col>
     </v-row>
     <v-row
-      v-if="!userHasAccess() && canRate()"
+      v-if="!trainingIsUsers()"
       class="d-flex justify-center align-center mt-8 mb-4"
     >
       <v-card>

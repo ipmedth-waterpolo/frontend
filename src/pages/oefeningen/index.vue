@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import {useExercises} from "@/api/composable/useExercises";
 import {useSelectedExercises} from "@/components/exerciseComponents/useSelectedExercises";
+import useUserData from "@/useRoles";
 import {ref, onMounted} from "vue";
 import ExerciseCategoryFilter from "@/components/exerciseComponents/ExerciseCategoryFilter.vue";
 
 const {exercises, error, fetchExercises} = useExercises();
 const {selectedExerciseIDs, toggleExerciseSelection, removeAllExercises} = useSelectedExercises();
+const {isAdminOrTrainer} = useUserData();
 const trashPopup = ref(false);
-
-const userRole = localStorage.getItem("userRole");
-const userHasAccess = () => {
-  return (
-    userRole === "admin" || userRole === "trainer"
-  );
-}
 
 onMounted(() => {
   fetchExercises();
@@ -32,7 +27,7 @@ const clickRemove = () => {
 
   <!--  conditional banner-->
   <div
-    v-if="selectedExerciseIDs.length > 0 && userHasAccess()"
+    v-if="selectedExerciseIDs.length > 0 && isAdminOrTrainer"
   >
     <v-bottom-navigation
       bg-color="primary"
