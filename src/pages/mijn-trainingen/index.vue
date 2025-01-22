@@ -7,7 +7,7 @@ import {computed, onMounted} from "vue";
 const {userData} = useUserData();
 const { trainings, error, fetchTrainings } = useTrainings();
 
-const userID = userData.value.userID.toString();
+const userID = userData.value.userID !== null ? userData.value.userID.toString() : '';
 
 onMounted(() => {
   fetchTrainings();

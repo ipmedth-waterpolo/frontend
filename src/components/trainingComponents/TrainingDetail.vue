@@ -46,7 +46,8 @@ const submitRating = async () => {
 };
 
 const trainingIsUsers = () => {
-  return userData.value.userID.toString() === props.training.userID;
+  const userID = userData.value.userID !== null ? userData.value.userID.toString() : '';
+  return userID === props.training.userID;
 };
 
 const showEditAndDelete = computed(() => {
