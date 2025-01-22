@@ -34,7 +34,7 @@ defineProps({
             <v-icon
               class="mr-2"
               :icon="exercise.water_nodig ? 'mdi-water-outline' : 'mdi-water-off-outline'"
-              :color="exercise.water_nodig ? 'blue' : 'red'"
+              :color="exercise.water_nodig ? 'primary' : 'error'"
             />
             <span>
                 {{ exercise.water_nodig ? 'Water nodig' : 'Geen water nodig' }}

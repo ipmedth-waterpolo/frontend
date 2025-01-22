@@ -76,7 +76,7 @@ const navigateToCategory = (categorie: string) => {
       <v-col v-for="(option, index) in categorieOptions" :key="index" cols="6">
         <v-card
           min-height="120"
-          :color="index === 0 ? 'blue-darken-3' : undefined"
+          :color="index === 0 ? 'primary' : undefined"
           @click="navigateToCategory(option.value)"
         >
           <v-card-title class="text-center text-h6 text-wrap">{{

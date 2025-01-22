@@ -67,6 +67,7 @@ const filteredExercises = computed(() => {
               item-value="value"
               item-title="label"
               label="Water oefening?"
+              color="secondary"
             ></v-select>
 
             <!-- Leeftijdsgroep Filter -->
@@ -77,6 +78,7 @@ const filteredExercises = computed(() => {
               item-title="label"
               multiple
               label="Leeftijdsgroep"
+              color="secondary"
             ></v-select>
 
             <!-- Duur Filter -->
@@ -86,6 +88,7 @@ const filteredExercises = computed(() => {
               label="Duur in minuten"
               step="5"
               thumb-label="always"
+              color="secondary"
             ></v-range-slider>
 
             <v-range-slider
@@ -94,6 +97,7 @@ const filteredExercises = computed(() => {
               label="Minimum spelers"
               thumb-label="always"
               step="1"
+              color="secondary"
             ></v-range-slider>
           </v-card-text>
         </v-expansion-panel-text>

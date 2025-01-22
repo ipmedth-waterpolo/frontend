@@ -48,6 +48,7 @@ const displayedTrainings = computed(() => {
         item-title="text"
         label="Sorteer op"
         outlined
+        color="secondary"
       />
     </div>
 
