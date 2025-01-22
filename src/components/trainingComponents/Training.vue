@@ -23,17 +23,14 @@ const getStarClass = (index: number, rating: number) => {
       <!-- Duration and Rating -->
       <div class="duration-rating">
         <div class="duration">
-          <v-icon icon="mdi-clock-outline" />
+          <v-icon icon="mdi-clock-outline"/>
           <span>{{ training.totale_duur }}</span>
         </div>
-
-        <div class="rating">
-          <i
-            v-for="index in 5"
-            :key="index"
-            :class="getStarClass(index, training.ratings)"
-          />
+        <div v-if="training.ratings" class="rating">
+          <div>{{ training.ratings }}</div>
+          <i class="fas fa-star"></i>
         </div>
+
       </div>
     </v-card-text>
   </v-card>

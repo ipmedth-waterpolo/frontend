@@ -3,7 +3,7 @@ import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
 import ToolbarWithBackButton from "@/components/small/ToolbarWithBackButton.vue";
 import {useTrainings} from "@/composable/useTrainings";
 import useUserData from "@/composable/useUserData";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import router from "@/router";
 import TrainingMaken from "@/pages/training-maken/aanmaken.vue";
 
@@ -28,24 +28,34 @@ const removeTraining = async () => {
 const editPopup = ref(false);
 
 const rating = ref<number>(0);
-const getStarClass = (index: number, trainingRating: number) => {
-  return index < trainingRating ? "fas fa-star" : "far fa-star";
-};
+// const getStarClass = (index: number, trainingRating: number) => {
+//   return index < trainingRating ? "fas fa-star" : "far fa-star";
+// };
 
 const submitRating = async () => {
+  console.log(rating.value);
   if (rating.value === 0) return;
 
   try {
     await addRating(props.training.id, rating.value);
-    console.log(`Rating of ${rating.value} submitted successfully.`);
+    await new Promise(r => setTimeout(r, 50));
+    router.go(0);
   } catch (error) {
     console.error("Failed to submit rating:", error);
   }
 };
 
 const trainingIsUsers = () => {
-  return userData.value.userID === props.training.userID;
+  return userData.value.userID.toString() === props.training.userID;
 };
+
+const showEditAndDelete = computed(() => {
+  return trainingIsUsers() || isAdmin.value;
+});
+
+const showGiveRating = computed(() => {
+  return !trainingIsUsers();
+});
 
 </script>
 
@@ -71,20 +81,32 @@ const trainingIsUsers = () => {
             <span>{{ training.totale_duur }} minuten</span>
           </div>
 
-          <div class="rating">
-            <i
-              v-for="index in 5"
-              :key="index"
-              :class="getStarClass(index, training.ratings)"
-            />
+          <div v-if="training.ratings" class="rating">
+            <div>{{ training.ratings }}</div>
+            <i class="fas fa-star"></i>
           </div>
+        </div>
+
+        <div
+          v-if="showGiveRating"
+          class="d-flex justify-center align-center mt-4"
+        >
+          <v-rating
+            v-model="rating"
+            :length="5"
+            color="yellow darken-3"
+            background-color="grey darken-1"
+            empty-icon="mdi-star-outline"
+            hover
+            @update:modelValue="submitRating"
+          ></v-rating>
         </div>
       </v-card-text>
     </v-card>
     <ExerciseList v-if="training.oefeningen" :exercises="training.oefeningen"/>
 
     <v-row
-      v-if="trainingIsUsers() || isAdmin"
+      v-if="showEditAndDelete"
       class="d-flex justify-center align-center mb-2"
     >
       <v-col cols="auto">
@@ -105,23 +127,6 @@ const trainingIsUsers = () => {
           Training Verwijderen
         </v-btn>
       </v-col>
-    </v-row>
-    <v-row
-      v-if="!trainingIsUsers()"
-      class="d-flex justify-center align-center mt-8 mb-4"
-    >
-      <v-card>
-        <v-card-text>Beoordeling geven</v-card-text>
-        <v-rating
-          v-model="rating"
-          :length="5"
-          color="yellow darken-3"
-          background-color="grey darken-1"
-          empty-icon="mdi-star-outline"
-          hover
-          @change="submitRating"
-        ></v-rating>
-      </v-card>
     </v-row>
 
     <v-dialog

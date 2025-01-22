@@ -1,12 +1,12 @@
 import axios from "axios";
-import { trainingDao } from "@/api/dao/training_dao";
-import { exerciseDao } from "@/api/dao/exercise_dao";
+import {trainingDao} from "@/api/dao/training_dao";
+import {exerciseDao} from "@/api/dao/exercise_dao";
 
 const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL,
-    headers: {
-        "x-api-key": import.meta.env.VITE_API_KEY,
-    },
+  baseURL: import.meta.env.VITE_BASE_URL,
+  headers: {
+    "x-api-key": import.meta.env.VITE_API_KEY,
+  },
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -21,87 +21,100 @@ axiosInstance.interceptors.request.use((config) => {
 
 // Map API response object to trainingDao
 const mapToTrainingDao = (training: any, oefeningen: exerciseDao[] = []): trainingDao => {
-    return new trainingDao(
-        training.id,
-        training.name,
-        !!training.enabled, // Ensure boolean type
-        training.beschrijving,
-        training.oefeningIDs,
-        training.userID.toString(), // Ensure string type
-        training.totale_duur,
-        training.created_at,
-        training.updated_at,
-        training.ratings ?? null, // Handle null ratings
-        oefeningen
-    );
+  return new trainingDao(
+    training.id,
+    training.name,
+    !!training.enabled, // Ensure boolean type
+    training.beschrijving,
+    training.oefeningIDs,
+    training.userID.toString(), // Ensure string type
+    training.totale_duur,
+    training.created_at,
+    training.updated_at,
+    training.ratings ?? null, // Handle null ratings
+    oefeningen
+  );
 };
 
 export const apiServiceTrainings = {
-    // Get the list of ALL trainings
-    async getTrainings(): Promise<trainingDao[]> {
-        try {
-            const response = await axiosInstance.get("/training");
-            // Extract and map the `data` array
-            return response.data.data.training.map(mapToTrainingDao);
-        } catch (error) {
-            console.error("Error fetching trainings:", error);
-            throw error;
-        }
-    },
+  // Get the list of ALL trainings
+  async getTrainings(): Promise<trainingDao[]> {
+    try {
+      const response = await axiosInstance.get("/training");
+      // Extract and map the `data` array
+      return response.data.data.training.map(mapToTrainingDao);
+    } catch (error) {
+      console.error("Error fetching trainings:", error);
+      throw error;
+    }
+  },
 
-    // Get a single training by ID
-    async getTrainingById(id: string): Promise<trainingDao> {
-        try {
-            const response = await axiosInstance.get(`/training/${id}`);
-            // Extract and map the single training object
-            return mapToTrainingDao(response.data.data.training, response.data.data.oefeningen);
-        } catch (error) {
-            console.error("Error fetching training by ID:", error);
-            throw error;
-        }
-    },
+  // Get a single training by ID
+  async getTrainingById(id: string): Promise<trainingDao> {
+    try {
+      const response = await axiosInstance.get(`/training/${id}`);
+      // Extract and map the single training object
+      return mapToTrainingDao(response.data.data.training, response.data.data.oefeningen);
+    } catch (error) {
+      console.error("Error fetching training by ID:", error);
+      throw error;
+    }
+  },
 
-    // Create a new training
-    async createTraining(trainingData: {
-        name: string;
-        enabled: boolean;
-        beschrijving: string;
-        oefeningIDs: number[];
-        userID: string;
-        totale_duur: number;
-        ratings?: number | null;
-    }): Promise<trainingDao> {
-        try {
-            const response = await axiosInstance.post("/training", trainingData);
-            return response.data.data.training;
-            //dit is dom dat dit niet ook data.data.training is, fix dit in back-end????
-        } catch (error) {
-            console.error("Error creating training:", error);
-            throw error;
-        }
-    },
+  // Create a new training
+  async createTraining(trainingData: {
+    name: string;
+    enabled: boolean;
+    beschrijving: string;
+    oefeningIDs: number[];
+    userID: string;
+    totale_duur: number;
+    ratings?: number | null;
+  }): Promise<trainingDao> {
+    try {
+      const response = await axiosInstance.post("/training", trainingData);
+      return response.data.data.training;
+      //dit is dom dat dit niet ook data.data.training is, fix dit in back-end????
+    } catch (error) {
+      console.error("Error creating training:", error);
+      throw error;
+    }
+  },
 
-    // Update an existing training
-    async updateTraining(
-        id: string,
-        trainingData: Partial<trainingDao>
-    ): Promise<trainingDao> {
-        try {
-            const response = await axiosInstance.put(`/training/${id}`, trainingData);
-            return response.data.data;
-        } catch (error) {
-            console.error("Error updating training:", error);
-            throw error;
-        }
-    },
+  // Update an existing training
+  async updateTraining(
+    id: string,
+    trainingData: Partial<trainingDao>
+  ): Promise<trainingDao> {
+    try {
+      const response = await axiosInstance.put(`/training/${id}`, trainingData);
+      return response.data.data;
+    } catch (error) {
+      console.error("Error updating training:", error);
+      throw error;
+    }
+  },
 
-    // Delete a training by ID
-    async deleteTraining(id: string): Promise<void> {
-        try {
-            await axiosInstance.delete(`/training/${id}`);
-        } catch (error) {
-            console.error("Error deleting training:", error);
-            throw error;
-        }
-    },
+  // Delete a training by ID
+  async deleteTraining(id: string): Promise<void> {
+    try {
+      await axiosInstance.delete(`/training/${id}`);
+    } catch (error) {
+      console.error("Error deleting training:", error);
+      throw error;
+    }
+  },
+
+  async addRating(trainingID: number, ratingNumber: number) {
+    try {
+      const response = await axiosInstance.post(`/training/${trainingID}/rating`, {
+        ratingNumber,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error adding rating:", error);
+      throw error;
+    }
+  },
+
 };

@@ -1,6 +1,5 @@
 import {trainingDao} from "@/api/dao/training_dao";
 import {inject, ref} from "vue";
-import axios from "axios";
 
 export function useTrainings() {
   const apiServiceTrainings = inject("apiServiceTrainings") as {
@@ -9,6 +8,7 @@ export function useTrainings() {
     createTraining: (newTraining: Record<string, any>) => Promise<trainingDao>;
     updateTraining: (id: string, updatedTraining: Record<string, any>) => Promise<trainingDao>;
     deleteTraining: (id: string) => Promise<void>;
+    addRating: (trainingID: number, ratingNumber: number) => Promise<void>;
   };
 
   const trainings = ref<trainingDao[]>([]);
@@ -70,10 +70,7 @@ export function useTrainings() {
 
   const addRating = async (trainingID: number, ratingNumber: number) => {
     try {
-      const response = await axios.post(`/training/${trainingID}/rating`, {
-        ratingNumber,
-      });
-      return response.data;
+      await apiServiceTrainings.addRating(trainingID, ratingNumber);
     } catch (error) {
       console.error("Error adding rating:", error);
       throw error;
