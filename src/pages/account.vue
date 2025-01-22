@@ -2,9 +2,10 @@
 
 import useUserData from "@/composable/useUserData";
 
-const {userData, callAndSetUserData, clearUserData} = useUserData();
+const {userData, callAndSetUserData, isAdmin} = useUserData();
 callAndSetUserData();
 
+const adminUrl = import.meta.env.VITE_ADMIN_URL + '/login';
 
 const logout = () => {
   localStorage.removeItem('authToken');
@@ -27,8 +28,15 @@ const logout = () => {
     <v-btn
       @click="logout"
       color="error"
-      class="mx-auto my-4"
+      class="ma-4"
     >Uitloggen
+    </v-btn>
+    <v-btn
+      v-if="isAdmin"
+      :href="adminUrl"
+      color="primary"
+      class="ma-4"
+    >Ga naar admin pagina
     </v-btn>
   </v-container>
 

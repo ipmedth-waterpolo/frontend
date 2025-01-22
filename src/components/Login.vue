@@ -120,6 +120,14 @@ export default defineComponent({
 <template>
   <v-app-bar>
     <v-app-bar-title>Waterpolo Planner</v-app-bar-title>
+    <v-img
+        inline
+        class="mx-2"
+        src="@/assets/ZVL_Logo.png"
+        contain
+        height="36"
+        width="36"
+    />
   </v-app-bar>
   <v-container
     fluid
