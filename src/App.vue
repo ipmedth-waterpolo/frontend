@@ -15,7 +15,7 @@ import RouterNav from "@/RouterNav.vue";
 import Login from "@/components/Login.vue";
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all.js';
-import useUserData from "@/useUserData";
+import useUserData from "@/composable/useUserData";
 
 const {callAndSetUserData, isAdminOrTrainer} = useUserData();
 

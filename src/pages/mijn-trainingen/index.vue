@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TrainingList from "@/components/trainingComponents/TrainingList.vue";
-import { useTrainings } from "@/api/composable/useTrainings";
-import useUserData from "@/useUserData";
+import { useTrainings } from "@/composable/useTrainings";
+import useUserData from "@/composable/useUserData";
 import {computed, onMounted} from "vue";
 
 const {userData} = useUserData();

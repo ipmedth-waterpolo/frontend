@@ -1,6 +1,6 @@
 <script lang="ts">
 import {defineComponent, ref,} from "vue";
-import {useExercises} from "@/api/composable/useExercises";
+import {useExercises} from "@/composable/useExercises";
 import ToolbarWithBackButton from "@/components/small/ToolbarWithBackButton.vue";
 
 export default defineComponent({

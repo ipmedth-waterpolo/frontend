@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import useUserData from "@/useUserData";
+import useUserData from "@/composable/useUserData";
 
 const {userData, callAndSetUserData, clearUserData} = useUserData();
 callAndSetUserData();

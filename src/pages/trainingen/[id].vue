@@ -2,7 +2,7 @@
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import TrainingDetail from "@/components/trainingComponents/TrainingDetail.vue";
-import {useTrainings} from "@/api/composable/useTrainings";
+import {useTrainings} from "@/composable/useTrainings";
 
 const { training, error, fetchTrainingById } = useTrainings();
 const route = useRoute();

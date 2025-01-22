@@ -1,8 +1,8 @@
 <script lang="ts">
 import {defineComponent, ref, computed, onMounted, watch} from "vue";
-import {useExercises} from "@/api/composable/useExercises";
-import {useTrainings} from "@/api/composable/useTrainings";
-import {useSelectedExercises} from "@/components/exerciseComponents/useSelectedExercises";
+import {useExercises} from "@/composable/useExercises";
+import {useTrainings} from "@/composable/useTrainings";
+import {useSelectedExercises} from "@/composable/useSelectedExercises";
 import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
 import router from "@/router";
 import ToolbarWithBackButton from "@/components/small/ToolbarWithBackButton.vue";

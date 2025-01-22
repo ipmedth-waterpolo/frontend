@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ExerciseList from "@/components/exerciseComponents/ExerciseList.vue";
 import ToolbarWithBackButton from "@/components/small/ToolbarWithBackButton.vue";
-import {useTrainings} from "@/api/composable/useTrainings";
-import useUserData from "@/useUserData";
+import {useTrainings} from "@/composable/useTrainings";
+import useUserData from "@/composable/useUserData";
 import {ref} from "vue";
 import router from "@/router";
 import TrainingMaken from "@/pages/training-maken/aanmaken.vue";

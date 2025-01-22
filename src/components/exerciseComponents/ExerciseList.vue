@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {exerciseDao} from "@/api/dao/exercise_dao";
 import Exercise from "@/components/exerciseComponents/Exercise.vue";
-import {useSelectedExercises} from "@/components/exerciseComponents/useSelectedExercises";
+import {useSelectedExercises} from "@/composable/useSelectedExercises";
 import AddButton from "@/components/small/AddButton.vue";
 
 defineProps({

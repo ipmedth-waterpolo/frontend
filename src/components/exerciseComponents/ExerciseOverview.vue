@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ExerciseCategoryFilter from "@/components/exerciseComponents/ExerciseCategoryFilter.vue";
-import {useSelectedExercises} from "@/components/exerciseComponents/useSelectedExercises";
+import {useSelectedExercises} from "@/composable/useSelectedExercises";
 import type {exerciseDao} from "@/api/dao/exercise_dao";
 import {ref} from "vue";
 

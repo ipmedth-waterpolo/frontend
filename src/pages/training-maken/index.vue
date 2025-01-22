@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {useExercises} from "@/api/composable/useExercises";
+import {useExercises} from "@/composable/useExercises";
 import {onMounted} from "vue";
 import ExerciseOverview from "@/components/exerciseComponents/ExerciseOverview.vue";
 
